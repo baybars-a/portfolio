@@ -32,7 +32,7 @@ const Hero: React.FC<HeroProps> = ({ name, data }) => {
         <div className="flex flex-col items-center text-center md:items-start md:text-left animate-fade-in-left">
           <div className="relative">
             <img
-              src="https://cdn.discordapp.com/attachments/937438146277285939/1435803447424450731/BaybarsImageCartoon-removebg-preview.png?ex=690f45e9&is=690df469&hm=4fed2e7935022f3fe0d135baaba0b6da7ed48d1fe43d46c2400b2828e9a03319&"
+              src="/favicon.ico"
               alt="Avatar of Baybars Al-Zibdeh"
               className="w-80 h-80 mb-6"
             />
