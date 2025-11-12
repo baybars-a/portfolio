@@ -9,7 +9,7 @@ export const initialData: PortfolioData = {
     greeting: "Hello world, I'm",
     description: "Computer Science student at York University. Aspiring AI engineer with a passion for developing intelligent systems and data-driven innovations. Experienced in machine learning frameworks like scikit-learn and pandas, with certifications in ML and Generative AI, eager to contribute to cutting-edge AI projects.",
     avatarUrl: "./BaybarsImageCartoon.png",
-    resumeUrl: "https://drive.google.com/file/d/1kRLJeOQdiMwSMoiLVXgH4jev7ygtj7Vm/view?usp=sharing",
+    resumeUrl: "https://drive.google.com/file/d/1DDzZLer6Pv6LJuq1yjDi6yD_gHqtGF5P/view?usp=sharing\?usp=sharing",
     email: "baybarsbahaa@gmail.com",
     socials: {
       linkedin: "https://www.linkedin.com/in/baybars-alzibdeh",
@@ -63,7 +63,7 @@ export const initialData: PortfolioData = {
     text2: "",
   },
   experience: {
-    resumeUrl: "https://drive.google.com/file/d/1kRLJeOQdiMwSMoiLVXgH4jev7ygtj7Vm/view?usp=sharing",
+    resumeUrl: "https://drive.google.com/file/d/1DDzZLer6Pv6LJuq1yjDi6yD_gHqtGF5P/view?usp=sharing\?usp=sharing",
     columns: [
       [
         { role: 'Machine Learning with Python', company: 'IBM' },
