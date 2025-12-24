@@ -68,6 +68,7 @@ export const initialData: PortfolioData = {
       [
         { role: 'Machine Learning with Python', company: 'IBM' },
         { role: 'IBM Z Xplore', company: 'IBM' },
+        { role: 'Fundamentals of Encryption & Quantum-Safe Techniques', company: 'IBM' }
       ],
       [
         { role: 'Generative AI Fundamentals', company: 'Databricks' },
