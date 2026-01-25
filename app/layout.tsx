@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-// FIX: Use relative path for import as '@/' alias is not configured.
 import { initialData } from "../constants/constants";
 
 export const metadata: Metadata = {
