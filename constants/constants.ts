@@ -82,6 +82,20 @@ export const initialData: PortfolioData = {
       ]
     ],
   },
+  workExperience: [
+    {
+      title: 'Front-End Developer Intern',
+      company: 'Treepz',
+      location: 'Toronto, ON',
+      period: 'Jan 2026 - Present',
+      description: [
+        'Build responsive web applications using Next.js, React, and TypeScript',
+        'Implement UI designs with Tailwind CSS and develop reusable component libraries',
+        'Integrate RESTful APIs and optimize application performance',
+        'Collaborate with cross-functional teams and participate in code reviews',
+      ],
+    },
+  ],
   certifications: [
       // {
       //   name: 'Machine Learning with Python',

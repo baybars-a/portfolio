@@ -10,6 +10,14 @@ export interface Experience {
   company: string;
 }
 
+export interface WorkExperience {
+  title: string;
+  company: string;
+  location: string;
+  period: string;
+  description: string[];
+}
+
 export interface Project {
   title: string;
   description: string;
@@ -43,7 +51,8 @@ export interface PortfolioData {
   experience: {
     resumeUrl: string;
     columns: Experience[][];
-  },
+  };
+  workExperience: WorkExperience[];
   certifications: Certification[];
   footer: {
     title: string;
