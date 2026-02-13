@@ -6,32 +6,28 @@ interface HeaderProps {
   data: { name: string; };
 }
 
-const Header: React.FC<HeaderProps> = ({ data }) => {
+const Header: React.FC<HeaderProps> = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: '#projects', label: 'Projects' },
-    { href: '#about', label: 'About' },
-    { href: '#experience', label: 'Certifications' },
-    { href: '#contact', label: 'Contact' },
+    { href: '#home', label: 'HOME' },
+    { href: '#projects', label: 'WORKS' },
+    { href: '#about', label: 'ABOUT' },
+    { href: '#contact', label: 'CONTACT' },
   ];
 
   return (
-    <header className="py-4 md:py-12">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900">
       <nav className="flex justify-between items-center">
-        <a
-          href=""
-          className="text-lg md:text-2xl font-bold text-white hover:text-gray-300 transition-colors"
-        >
-          {data.name}
-        </a>
-
         {/* Desktop Navigation */}
-        <ul className="hidden md:flex space-x-8 text-base">
+        <ul className="hidden md:flex w-full justify-between">
           {navLinks.map((link) => (
-            <li key={link.href}>
-              <a href={link.href} className="text-gray-300 hover:text-white transition-colors">
-                {link.label}
+            <li key={link.href} className="flex-1 text-center">
+              <a
+                href={link.href}
+                className="nav-link-animated inline-block px-8 py-3 text-white text-sm tracking-widest font-medium relative overflow-hidden"
+              >
+                <span className="relative z-10">{link.label}</span>
               </a>
             </li>
           ))}
@@ -40,7 +36,7 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
         {/* Mobile Hamburger Button */}
         <button
           type="button"
-          className="md:hidden text-white p-2"
+          className="md:hidden text-white p-4 mx-auto"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
@@ -61,15 +57,15 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <ul className="md:hidden mt-4 flex flex-col space-y-4 text-base">
+        <ul className="md:hidden flex flex-col items-center gap-2 pb-4 bg-gray-900">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="text-gray-300 hover:text-white transition-colors block py-2"
+                className="nav-link-animated inline-block px-8 py-3 text-white text-sm tracking-widest font-medium relative overflow-hidden"
                 onClick={() => setIsMenuOpen(false)}
               >
-                {link.label}
+                <span className="relative z-10">{link.label}</span>
               </a>
             </li>
           ))}

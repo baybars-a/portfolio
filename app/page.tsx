@@ -16,7 +16,7 @@ const Home: React.FC = () => {
   const { header, name, hero, projects, workExperience, about, experience, footer } = initialData;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pt-14">
       <div className="container mx-auto px-6 md:px-12 lg:px-24 bg-gray-900/50 backdrop-blur-sm">
         <Header data={header} />
         <main>

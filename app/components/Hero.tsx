@@ -12,7 +12,7 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ name, data }) => {
 
   return (
-    <section className="relative flex items-center justify-center min-h-[80vh] py-16 md:py-24 overflow-hidden rounded-lg border border-white/10">
+    <section id="home" className="relative flex items-center justify-center min-h-[80vh] py-16 md:py-24 overflow-hidden rounded-lg border border-white/10">
       <video autoPlay loop muted playsInline
           className="absolute top-0 left-0 w-full h-full object-cover -z-20"
       >
