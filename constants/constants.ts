@@ -120,7 +120,7 @@ export const initialData: PortfolioData = {
   ],
   footer: {
     title: "Get in touch",
-    // subtitle: "I'm currently open to new opportunities. Feel free to reach out!",
+    subtitle: "",
     email: "baybarsbahaa@gmail.com",
     socials: {
       linkedin: "https://www.linkedin.com/in/baybars-alzibdeh/",
