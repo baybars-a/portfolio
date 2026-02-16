@@ -11,7 +11,7 @@ const Header: React.FC<HeaderProps> = () => {
 
   const navLinks = [
     { href: '#home', label: 'HOME' },
-    { href: '#projects', label: 'WORKS' },
+    { href: '#projects', label: 'PROJECTS' },
     { href: '#work-experience', label: 'EXPERIENCE' },
     { href: '#about', label: 'ABOUT' },
     { href: '#contact', label: 'CONTACT' },

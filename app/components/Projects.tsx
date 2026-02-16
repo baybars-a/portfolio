@@ -25,7 +25,7 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
     <section id="projects" className="py-20 md:py-32 max-w-6xl mx-auto px-6">
       <div className="flex justify-between items-center mb-16">
         <ScrambleText
-          text="Selected Works"
+          text="Projects"
           as="h2"
           className="text-3xl md:text-5xl font-mono font-bold tracking-tight text-white"
         />
