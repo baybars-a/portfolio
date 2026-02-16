@@ -13,30 +13,23 @@
   position: relative;
 }
 
-.nav-link-animated::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 0%;
-  background-color: #c1e600;
-  transition: height 0.3s ease;
-  z-index: 0;
-}
-
-.nav-link-animated:hover::before {
-  height: 100%;
-}
-
 .nav-link-animated span {
   position: relative;
   z-index: 1;
-  transition: color 0.3s ease, text-shadow 0.3s ease, filter 0.3s ease;
+  background: linear-gradient(to top, #c1e600 var(--fill), transparent var(--fill));
+  --fill: 0%;
+  transition: color 0.3s ease, --fill 0.3s ease, text-shadow 0.3s ease, filter 0.3s ease;
 }
 
 .nav-link-animated:hover span {
   color: black;
+  --fill: 100%;
+}
+
+@property --fill {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
 }
 
 /* Mouse spotlight text glow transitions */
