@@ -6,7 +6,7 @@ interface HeaderProps {
   data: { name: string; };
 }
 
-const Header: React.FC<HeaderProps> = () => {
+const Header: React.FC<HeaderProps> = ({ data }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
@@ -18,7 +18,7 @@ const Header: React.FC<HeaderProps> = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-neutral-950/90 backdrop-blur-sm border-b border-white/10">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-neutral-950/90 backdrop-blur-sm border-b border-white/10 opacity-0 animate-fade-in-up">
       <nav className="max-w-6xl mx-auto flex items-center justify-center px-6 py-4">
         {/* Desktop Navigation */}
         <ul className="hidden md:flex gap-10">
@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = () => {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="nav-link-animated inline-block text-gray-300 text-xs font-mono tracking-widest uppercase px-3 py-2 overflow-hidden"
+                className="nav-link-animated inline-block text-gray-300 text-xs font-mono tracking-widest uppercase px-1 py-0.5 overflow-hidden"
               >
                 <span>{link.label}</span>
               </a>
