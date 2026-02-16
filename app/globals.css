@@ -11,25 +11,25 @@
 /* Navigation link hover underline animation */
 .nav-link-animated {
   position: relative;
+  overflow: hidden;
 }
 
 .nav-link-animated span {
   position: relative;
   z-index: 1;
-  background: linear-gradient(to top, #c1e600 var(--fill), transparent var(--fill));
-  --fill: 0%;
-  transition: color 0.3s ease, --fill 0.3s ease, text-shadow 0.3s ease, filter 0.3s ease;
+  background: linear-gradient(to top, #c1e600 0%, transparent 0%);
+  background-size: 100% 200%;
+  background-position: 0% 100%;
+  transition: color 0.3s ease, background-position 0.3s ease, text-shadow 0.3s ease, filter 0.3s ease;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-color: #d1d5db; /* gray-300 fallback */
 }
 
 .nav-link-animated:hover span {
   color: black;
-  --fill: 100%;
-}
-
-@property --fill {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 0%;
+  background-position: 0% 0%;
 }
 
 /* Mouse spotlight text glow transitions */
