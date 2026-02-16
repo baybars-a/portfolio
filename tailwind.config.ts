@@ -6,6 +6,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        accent: '#c1e600',
+      },
+      fontFamily: {
+        mono: ['"Space Mono"', 'monospace'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
       keyframes: {
         'fade-in-up': {
           '0%': { opacity: '0', transform: 'translateY(20px)' },

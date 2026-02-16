@@ -1,8 +1,8 @@
 import React from 'react';
 import { LinkedInIcon } from './icons/LinkedInIcon';
 import { GithubIcon } from './icons/GithubIcon';
-import { XIcon } from './icons/XIcon';
 import { PortfolioData } from '../../types';
+import ScrambleText from './ScrambleText';
 
 interface HeroProps {
   name: string;
@@ -10,54 +10,45 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ name, data }) => {
-
   return (
-    <section id="home" className="relative flex items-center justify-center min-h-[80vh] py-16 md:py-24 overflow-hidden rounded-lg border border-white/10">
-      <video autoPlay loop muted playsInline
-          className="absolute top-0 left-0 w-full h-full object-cover -z-20"
-      >
-          <source src="./background_vid.mp4" type='video/mp4' />
-          
-          Your browser does not support the video tag.
-      </video>
-      <div className="absolute top-0 left-0 w-full h-full bg-black/50 -z-10"></div>
-      
-      <div className="grid md:grid-cols-2 gap-16 items-center w-full max-w-6xl mx-auto">
-        {/* Left Column */}
-        <div className="flex flex-col items-center text-center md:items-start md:text-left animate-fade-in-left">
-          <div className="relative">
-            <img
-              src="./BaybarsImageCartoon.png"
-              alt="Avatar of Baybars Al-Zibdeh"
-              className="w-80 h-80 mb-6"
-            />
-          </div>
-          <p className="text-lg text-gray-200 mb-2 drop-shadow-md">{data.greeting}</p>
-          <h1 className="text-5xl md:text-6xl font-mono text-white tracking-tighter drop-shadow-md">
-            Baybars
-          </h1>
-          <div className="flex space-x-4 mt-6">
-            <a href={data.socials.linkedin} aria-label="LinkedIn" className="text-gray-300 hover:text-white transition-colors drop-shadow-md">
-              <LinkedInIcon className="w-8 h-8" />
-            </a>
-            <a href={data.socials.github} aria-label="GitHub" className="text-gray-300 hover:text-white transition-colors drop-shadow-md">
-              <GithubIcon className="w-8 h-8" />
-            </a>
-          </div>
+    <section id="home" className="relative flex flex-col items-center justify-center min-h-screen bg-black text-white px-6">
+      <div className="max-w-3xl mx-auto text-center animate-fade-in-up">
+        <p className="font-mono text-sm md:text-base tracking-wide text-gray-400 mb-4">
+          {data.greeting}
+        </p>
+        <ScrambleText
+          text="Baybars"
+          as="h1"
+          className="text-5xl sm:text-6xl md:text-8xl font-mono font-bold tracking-tighter mb-8"
+        />
+        <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-10">
+          {data.description}
+        </p>
+
+        {/* Social Icons */}
+        <div className="flex justify-center gap-5 mb-10">
+          <a href={data.socials.linkedin} aria-label="LinkedIn" className="text-gray-400 hover:text-accent transition-colors">
+            <LinkedInIcon className="w-6 h-6" />
+          </a>
+          <a href={data.socials.github} aria-label="GitHub" className="text-gray-400 hover:text-accent transition-colors">
+            <GithubIcon className="w-6 h-6" />
+          </a>
         </div>
 
-        {/* Right Column */}
-        <div className="bg-black/20 backdrop-blur-md p-8 rounded-lg border border-white/10 space-y-4 animate-fade-in-right [animation-delay:200ms]">
-          <h2 className="text-3xl font-bold text-white tracking-wide">About</h2>
-          <p className="text-gray-300 text-lg leading-relaxed">{data.description}</p>
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <a href={data.resumeUrl} className="w-full text-center bg-white text-black font-semibold py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors">
-              RESUME
-            </a>
-            <a href={`mailto:${data.email}`} className="w-full text-center bg-white text-black font-semibold py-3 px-6 rounded-lg hover:bg-gray-200 transition-colors">
-              EMAIL ME
-            </a>
-          </div>
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <a
+            href={data.resumeUrl}
+            className="bg-accent text-black font-mono text-sm font-bold tracking-widest py-3 px-8 hover:bg-accent/80 transition-colors"
+          >
+            RESUME
+          </a>
+          <a
+            href={`mailto:${data.email}`}
+            className="border border-white text-white font-mono text-sm font-bold tracking-widest py-3 px-8 hover:bg-white hover:text-black transition-colors"
+          >
+            EMAIL ME
+          </a>
         </div>
       </div>
     </section>

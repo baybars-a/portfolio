@@ -1,6 +1,7 @@
 import React from 'react';
 import ProjectCard from './ProjectCard';
 import { Project } from '../../types';
+import ScrambleText from './ScrambleText';
 
 interface ProjectsProps {
   data: Project[];
@@ -21,21 +22,23 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
   };
 
   return (
-    <section id="projects" className="py-16 md:py-24">
-      <div className="flex justify-between items-center mb-12">
-        <h2 className="text-3xl md:text-4xl font-mono text-white-900">
-          Projects
-        </h2>
+    <section id="projects" className="py-20 md:py-32 max-w-6xl mx-auto px-6">
+      <div className="flex justify-between items-center mb-16">
+        <ScrambleText
+          text="Selected Works"
+          as="h2"
+          className="text-3xl md:text-5xl font-mono font-bold tracking-tight text-white"
+        />
         {isEditMode && (
-          <button onClick={handleAddProject} className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+          <button onClick={handleAddProject} className="bg-accent text-black px-4 py-2 font-mono text-sm font-bold hover:bg-accent/80">
             Add Project
           </button>
         )}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
         {data.map((project, index) => (
-          <ProjectCard 
-            key={index} 
+          <ProjectCard
+            key={index}
             {...project}
             isEditMode={isEditMode}
             onUpdate={(field, value) => onUpdate(`projects.${index}.${field}`, value)}

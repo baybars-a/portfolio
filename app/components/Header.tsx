@@ -12,22 +12,23 @@ const Header: React.FC<HeaderProps> = () => {
   const navLinks = [
     { href: '#home', label: 'HOME' },
     { href: '#projects', label: 'WORKS' },
+    { href: '#work-experience', label: 'EXPERIENCE' },
     { href: '#about', label: 'ABOUT' },
     { href: '#contact', label: 'CONTACT' },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-gray-900">
-      <nav className="flex justify-between items-center">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-neutral-950/90 backdrop-blur-sm border-b border-white/10">
+      <nav className="max-w-6xl mx-auto flex items-center justify-center px-6 py-4">
         {/* Desktop Navigation */}
-        <ul className="hidden md:flex w-full justify-between">
+        <ul className="hidden md:flex gap-10">
           {navLinks.map((link) => (
-            <li key={link.href} className="flex-1 text-center">
+            <li key={link.href}>
               <a
                 href={link.href}
-                className="nav-link-animated inline-block px-8 py-3 text-white text-sm tracking-widest font-medium relative overflow-hidden"
+                className="nav-link-animated inline-block text-gray-300 text-xs font-mono tracking-widest uppercase px-3 py-2 overflow-hidden"
               >
-                <span className="relative z-10">{link.label}</span>
+                <span>{link.label}</span>
               </a>
             </li>
           ))}
@@ -36,16 +37,11 @@ const Header: React.FC<HeaderProps> = () => {
         {/* Mobile Hamburger Button */}
         <button
           type="button"
-          className="md:hidden text-white p-4 mx-auto"
+          className="md:hidden text-gray-300 p-2"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {isMenuOpen ? (
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             ) : (
@@ -57,15 +53,15 @@ const Header: React.FC<HeaderProps> = () => {
 
       {/* Mobile Navigation Menu */}
       {isMenuOpen && (
-        <ul className="md:hidden flex flex-col items-center gap-2 pb-4 bg-gray-900">
+        <ul className="md:hidden flex flex-col items-start gap-1 px-6 pb-4 bg-neutral-950 border-b border-white/10">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="nav-link-animated inline-block px-8 py-3 text-white text-sm tracking-widest font-medium relative overflow-hidden"
+                className="nav-link-animated inline-block py-2 px-3 text-gray-300 text-xs font-mono tracking-widest uppercase overflow-hidden"
                 onClick={() => setIsMenuOpen(false)}
               >
-                <span className="relative z-10">{link.label}</span>
+                <span>{link.label}</span>
               </a>
             </li>
           ))}
