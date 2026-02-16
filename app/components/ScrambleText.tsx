@@ -9,45 +9,46 @@ interface ScrambleTextProps {
   scrambleSpeed?: number;
 }
 
-const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_./:';
+const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
 const ScrambleText: React.FC<ScrambleTextProps> = ({
   text,
   className = '',
   as: Tag = 'h2',
-  scrambleSpeed = 30,
+  scrambleSpeed = 80,
 }) => {
   const [displayText, setDisplayText] = useState(text);
   const hasAnimated = useRef(false);
   const ref = useRef<HTMLElement>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const scramble = useCallback(() => {
-    let progress = 0;
+const scramble = useCallback(() => {
+  let index = 0;
 
-    intervalRef.current = setInterval(() => {
-      const resolved = Math.floor(progress);
+  intervalRef.current = setInterval(() => {
+    setDisplayText((prev) =>
+      text
+        .split('')
+        .map((char, i) => {
+          if (char === ' ') return ' ';
+          if (i < index) return text[i];
+          return CHARS[Math.floor(Math.random() * CHARS.length)];
+        })
+        .join('')
+    );
 
-      setDisplayText(
-        text
-          .split('')
-          .map((char, i) => {
-            if (char === ' ') return ' ';
-            if (i < resolved) return text[i];
-            return CHARS[Math.floor(Math.random() * CHARS.length)];
-          })
-          .join('')
-      );
+    index++;
 
-      progress += 0.5;
-
-      if (progress > text.length) {
-        clearInterval(intervalRef.current!);
+    if (index > text.length) {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
         intervalRef.current = null;
-        setDisplayText(text);
       }
-    }, scrambleSpeed);
-  }, [text, scrambleSpeed]);
+      setDisplayText(text);
+    }
+  }, scrambleSpeed);
+}, [text, scrambleSpeed]);
+
 
   useEffect(() => {
     const el = ref.current;
