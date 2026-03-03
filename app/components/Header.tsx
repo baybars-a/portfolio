@@ -14,11 +14,11 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
     { href: '#projects', label: 'PROJECTS' },
     { href: '#work-experience', label: 'EXPERIENCE' },
     { href: '#about', label: 'ABOUT' },
-    { href: '#contact', label: 'CONTACT' },
+    { href: '#experience', label: 'CERTIFICATIONS' },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-neutral-950/90 backdrop-blur-sm border-b border-white/10 opacity-0 animate-fade-in-up">
+    <header className="fixed top-0 left-0 right-0 z-[60] bg-neutral-950/90 backdrop-blur-sm border-b border-white/10 opacity-0 animate-fade-in-up">
       <nav className="max-w-6xl mx-auto flex items-center justify-center px-6 py-4">
         {/* Desktop Navigation */}
         <ul className="hidden md:flex gap-10">

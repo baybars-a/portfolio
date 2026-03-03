@@ -8,7 +8,7 @@ interface WorkExperienceProps {
 
 const WorkExperience: React.FC<WorkExperienceProps> = ({ data }) => {
   return (
-    <section id="work-experience" className="py-20 md:py-32 bg-neutral-900">
+    <section className="py-20 md:py-32 bg-neutral-900">
       <div className="max-w-6xl mx-auto px-6">
         <ScrambleText
           text="Experience"
