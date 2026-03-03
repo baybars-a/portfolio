@@ -28,7 +28,7 @@ const Home: React.FC = () => {
 
         {/* Layer 1 — Hero */}
         <div id="home" />
-        <div className="sticky top-0 z-10 min-h-screen">
+        <div className="relative z-10 min-h-screen">
           <Hero name={name} data={hero} />
         </div>
 
