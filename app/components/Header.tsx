@@ -9,6 +9,21 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ data }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const id = href.slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+    // Walk offsetParent chain to get natural document position (unaffected by sticky)
+    let top = 0;
+    let node: HTMLElement | null = target;
+    while (node) {
+      top += node.offsetTop;
+      node = node.offsetParent as HTMLElement | null;
+    }
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
   const navLinks = [
     { href: '#home', label: 'HOME' },
     { href: '#projects', label: 'PROJECTS' },
@@ -26,6 +41,7 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
             <li key={link.href}>
               <a
                 href={link.href}
+                onClick={(e) => scrollToSection(e, link.href)}
                 className="nav-link-animated inline-block text-gray-300 text-xs font-mono tracking-widest uppercase px-1 py-0.5 overflow-hidden"
               >
                 <span>{link.label}</span>
@@ -59,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
               <a
                 href={link.href}
                 className="nav-link-animated inline-block py-2 px-3 text-gray-300 text-xs font-mono tracking-widest uppercase overflow-hidden"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => { scrollToSection(e, link.href); setIsMenuOpen(false); }}
               >
                 <span>{link.label}</span>
               </a>

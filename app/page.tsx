@@ -17,7 +17,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-<Header data={header} />
+      <Header data={header} />
       <main>
         <Hero name={name} data={hero} />
         <Projects data={projects} isEditMode={false} onUpdate={noop} onAdd={noop} onRemove={noop} />

@@ -39,11 +39,6 @@
   z-index: 1;
 }
 
-/* Mouse spotlight text glow transitions */
-h1, h2, h3, p, a, li, button {
-  transition: text-shadow 0.3s ease, filter 0.3s ease;
-}
-
 /* Dot matrix airport board effect for section titles */
 .dot-title {
   text-transform: uppercase;

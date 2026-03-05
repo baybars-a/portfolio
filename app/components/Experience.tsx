@@ -14,9 +14,9 @@ const Experience: React.FC<ExperienceProps> = ({ data, isEditMode, onUpdate }) =
     <section id="experience" className="relative py-20 md:py-32 overflow-hidden">
       <video
         autoPlay loop muted playsInline
-        className="absolute inset-0 w-full h-full object-cover -z-10"
+        className="absolute inset-0 w-full h-full object-cover z-0"
       >
-        <source src="./background_vid.mp4" type="video/mp4" />
+        <source src="/background_vid.mp4" type="video/mp4" />
       </video>
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <ScrambleText
