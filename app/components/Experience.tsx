@@ -1,13 +1,7 @@
-'use client';
 import React from 'react';
-import dynamic from 'next/dynamic';
 import { PortfolioData, Experience as ExperienceType } from '../../types';
+import Certifications from './Certifications';
 import ScrambleText from './ScrambleText';
-
-const LiquidGradient = dynamic(
-  () => import('./ui/flow-gradient-hero-section'),
-  { ssr: false, loading: () => null }
-);
 
 interface ExperienceProps {
   data: PortfolioData['experience'];
@@ -17,8 +11,13 @@ interface ExperienceProps {
 
 const Experience: React.FC<ExperienceProps> = ({ data, isEditMode, onUpdate }) => {
   return (
-    <section className="relative py-20 md:py-32 overflow-hidden min-h-screen">
-      <LiquidGradient showPauseButton={false} />
+    <section id="experience" className="relative py-20 md:py-32 overflow-hidden">
+      <video
+        autoPlay loop muted playsInline
+        className="absolute inset-0 w-full h-full object-cover -z-10"
+      >
+        <source src="./background_vid.mp4" type="video/mp4" />
+      </video>
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <ScrambleText
           text="Certifications"

@@ -11,7 +11,7 @@ interface AboutProps {
 
 const About: React.FC<AboutProps> = ({ data, isEditMode, onUpdate }) => {
   return (
-    <section className="py-20 md:py-32 max-w-6xl mx-auto px-6">
+    <section id="about" className="py-20 md:py-32 max-w-6xl mx-auto px-6">
       <div className="flex flex-col md:flex-row items-center gap-16">
         <div className="md:w-1/3">
           <div className="aspect-square rounded-full overflow-hidden w-48 h-48 md:w-64 md:h-64 mx-auto border-4 border-white/10">

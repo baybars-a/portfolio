@@ -11,7 +11,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ name, data }) => {
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen bg-black text-white px-6">
+    <section id="home" className="relative flex flex-col items-center justify-center min-h-screen bg-black text-white px-6">
       <div className="max-w-3xl mx-auto text-center opacity-0 animate-fade-in-up">
         <p className="font-mono text-sm md:text-base tracking-wide text-gray-400 mb-4">
           {data.greeting}
