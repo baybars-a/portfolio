@@ -33,7 +33,17 @@ export function ScrollAnimations() {
         },
       });
 
-      // Removed hero blur for performance
+      // Hero blur: whole section blurs on scroll-down, clears on scroll-up
+      gsap.to('#home', {
+        filter: 'blur(18px)',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#home',
+          start: 'top top',
+          end: '65% top',
+          scrub: true,
+        },
+      });
 
       // ── Section reveals ───────────────────────────────────────────────
       // immediateRender: false = elements stay visible until the trigger fires,

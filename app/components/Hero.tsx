@@ -12,7 +12,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ name, data }) => {
   return (
-    <section id="home" className="relative flex flex-col items-center justify-center min-h-screen bg-black text-white px-6 overflow-hidden">
+    <section id="home" className="relative flex flex-col items-center justify-center min-h-screen bg-black text-white px-6 overflow-hidden" style={{ willChange: 'filter', transform: 'translateZ(0)' }}>
       <HeroDitheringBackground />
       <div id="hero-content" className="relative z-10 max-w-3xl mx-auto text-center">
         <p className="font-mono text-sm md:text-base tracking-wide text-gray-400 mb-4">
@@ -21,7 +21,7 @@ const Hero: React.FC<HeroProps> = ({ name, data }) => {
         <ScrambleText
           text="Baybars"
           as="h1"
-          className="text-5xl sm:text-6xl md:text-8xl font-bluescreen tracking-tighter mb-8"
+          className="text-5xl sm:text-6xl md:text-8xl font-marques tracking-tighter mb-8"
         />
         <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-10">
           {data.description}

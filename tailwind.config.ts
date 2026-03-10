@@ -15,6 +15,7 @@ const config: Config = {
         mono: ['"Space Mono"', 'monospace'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
         bluescreen: ['"BlueScreen"', 'cursive'],
+        marques: ['"MarquesRoundedDisco"', 'cursive'],
       },
       keyframes: {
         'fade-in-up': {

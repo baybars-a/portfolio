@@ -22,7 +22,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="font-sans antialiased bg-neutral-950 text-gray-200">
+      <body className="font-sans antialiased bg-neutral-950 text-gray-200 overflow-x-hidden max-w-full">
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
           {children}
         </ThemeProvider>
