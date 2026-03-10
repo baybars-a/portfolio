@@ -3,6 +3,7 @@ import { LinkedInIcon } from './icons/LinkedInIcon';
 import { GithubIcon } from './icons/GithubIcon';
 import { PortfolioData } from '../../types';
 import ScrambleText from './ScrambleText';
+import { HeroDitheringBackground } from '../../components/ui/hero-dithering-card';
 
 interface HeroProps {
   name: string;
@@ -11,15 +12,16 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ name, data }) => {
   return (
-    <section id="home" className="relative flex flex-col items-center justify-center min-h-screen bg-black text-white px-6">
-      <div className="max-w-3xl mx-auto text-center opacity-0 animate-fade-in-up">
+    <section id="home" className="relative flex flex-col items-center justify-center min-h-screen bg-black text-white px-6 overflow-hidden">
+      <HeroDitheringBackground />
+      <div id="hero-content" className="relative z-10 max-w-3xl mx-auto text-center">
         <p className="font-mono text-sm md:text-base tracking-wide text-gray-400 mb-4">
           {data.greeting}
         </p>
         <ScrambleText
           text="Baybars"
           as="h1"
-          className="text-5xl sm:text-6xl md:text-8xl font-mono font-bold tracking-tighter mb-8"
+          className="text-5xl sm:text-6xl md:text-8xl font-bluescreen tracking-tighter mb-8"
         />
         <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-10">
           {data.description}

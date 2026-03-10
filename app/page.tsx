@@ -9,6 +9,8 @@ import About from './components/About';
 import Experience from './components/Experience';
 import Footer from './components/Footer';
 import { initialData } from '../constants/constants';
+import { SmoothScroll } from './components/SmoothScroll';
+import { ScrollAnimations } from './components/ScrollAnimations';
 
 const noop = () => {};
 
@@ -17,7 +19,9 @@ const Home: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-<Header data={header} />
+      <SmoothScroll />
+      <ScrollAnimations />
+      <Header data={header} />
       <main>
         <Hero name={name} data={hero} />
         <Projects data={projects} isEditMode={false} onUpdate={noop} onAdd={noop} onRemove={noop} />

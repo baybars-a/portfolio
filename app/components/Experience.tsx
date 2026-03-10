@@ -2,6 +2,7 @@ import React from 'react';
 import { PortfolioData, Experience as ExperienceType } from '../../types';
 import Certifications from './Certifications';
 import ScrambleText from './ScrambleText';
+import LocalInput from './LocalInput';
 
 interface ExperienceProps {
   data: PortfolioData['experience'];
@@ -12,12 +13,6 @@ interface ExperienceProps {
 const Experience: React.FC<ExperienceProps> = ({ data, isEditMode, onUpdate }) => {
   return (
     <section id="experience" className="relative py-20 md:py-32 overflow-hidden">
-      <video
-        autoPlay loop muted playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      >
-        <source src="/background_vid.mp4" type="video/mp4" />
-      </video>
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <ScrambleText
           text="Certifications"
@@ -54,10 +49,10 @@ const Experience: React.FC<ExperienceProps> = ({ data, isEditMode, onUpdate }) =
             RESUME
           </a>
           {isEditMode && (
-            <input
+            <LocalInput
               type="text"
               value={data.resumeUrl}
-              onChange={e => onUpdate('experience.resumeUrl', e.target.value)}
+              onCommit={val => onUpdate('experience.resumeUrl', val)}
               className="w-full bg-neutral-800 text-white p-1 mt-2 text-xs border border-white/10"
               aria-label="Resume URL"
             />

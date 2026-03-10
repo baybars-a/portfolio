@@ -2,6 +2,7 @@ import React from 'react';
 // FIX: Use relative path for import as '@/' alias is not configured.
 import { PortfolioData } from '../../types';
 import ScrambleText from './ScrambleText';
+import LocalInput from './LocalInput';
 
 interface AboutProps {
   data: PortfolioData['about'];
@@ -21,7 +22,7 @@ const About: React.FC<AboutProps> = ({ data, isEditMode, onUpdate }) => {
               className="w-full h-full object-cover"
             />
           </div>
-          {isEditMode && <input type="text" value={data.imageUrl} onChange={e => onUpdate('about.imageUrl', e.target.value)} className="w-full bg-neutral-800 text-white p-1 mt-2 text-xs border border-white/10" aria-label="About Me Image URL" />}
+          {isEditMode && <LocalInput type="text" value={data.imageUrl} onCommit={val => onUpdate('about.imageUrl', val)} className="w-full bg-neutral-800 text-white p-1 mt-2 text-xs border border-white/10" aria-label="About Me Image URL" />}
         </div>
         <div className="md:w-2/3">
           <ScrambleText

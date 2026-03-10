@@ -1,5 +1,6 @@
 import React from 'react';
 import { Project } from '../../types';
+import LocalInput from './LocalInput';
 
 interface ProjectCardProps extends Project {
   isEditMode: boolean;
@@ -13,11 +14,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, imageUrl,
     newTags[index] = value;
     onUpdate('tags', newTags);
   };
-  
+
   const handleAddTag = () => {
     onUpdate('tags', [...tags, 'New Tag']);
   }
-  
+
   const handleRemoveTag = (index: number) => {
     onUpdate('tags', tags.filter((_: string, i: number) => i !== index));
   }
@@ -36,7 +37,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, imageUrl,
           alt={title}
           className="w-full h-64 object-cover transform transition-transform duration-500 ease-in-out group-hover:scale-105"
         />
-        {isEditMode && <input type="text" value={imageUrl} onChange={e => onUpdate('imageUrl', e.target.value)} className="w-full bg-neutral-800 text-white p-1 mt-2 text-xs border border-white/10" aria-label="Project Image URL" />}
+        {isEditMode && <LocalInput type="text" value={imageUrl} onCommit={val => onUpdate('imageUrl', val)} className="w-full bg-neutral-800 text-white p-1 mt-2 text-xs border border-white/10" aria-label="Project Image URL" />}
       </div>
       <h3
         contentEditable={isEditMode}

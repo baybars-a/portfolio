@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { initialData } from "../constants/constants";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: `${initialData.name} | Personal Portfolio`,
@@ -12,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -21,7 +22,11 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="font-sans antialiased bg-neutral-950 text-gray-200">{children}</body>
+      <body className="font-sans antialiased bg-neutral-950 text-gray-200">
+        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
