@@ -16,6 +16,9 @@ const config: Config = {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         bluescreen: ['"BlueScreen"', 'cursive'],
         marques: ['"MarquesRoundedDisco"', 'cursive'],
+        ostro: ['"FS Ostro Display VF Regular"', 'serif'],
+        sekuya: ['"Sekuya"', 'system-ui'],
+        cree: ['"BJ Cree"', 'serif'],
       },
       keyframes: {
         'fade-in-up': {

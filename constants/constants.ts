@@ -7,7 +7,7 @@ export const initialData: PortfolioData = {
   },
   hero: {
     greeting: "Hello world, I'm",
-    description: "Computer Science student at York University. Aspiring AI engineer with a passion for developing intelligent systems and data-driven innovations. Experienced in machine learning frameworks like scikit-learn and pandas, with certifications in ML and Generative AI, eager to contribute to cutting-edge AI projects.",
+    description: "Computer Science student at York University, focused on AI and machine learning. I build models that find patterns, make predictions, and turn raw data into decisions worth acting on.",
     avatarUrl: "/BaybarsImageCartoon.png",
     resumeUrl: "https://drive.google.com/file/d/1DDzZLer6Pv6LJuq1yjDi6yD_gHqtGF5P/view?usp=sharing\?usp=sharing",
     email: "baybarsbahaa@gmail.com",
@@ -20,46 +20,44 @@ export const initialData: PortfolioData = {
   projects: [
     {
       title: 'Collaborative Filtering Recommendation System',
-      description: 'Implemented a collaborative filtering-based movie recommendation system using Python and Pandas, processing a dataset of 1 million+ ratings. Calculated Pearson correlation to identify top 50 similar users and recommend movies. Generated personalized recommendations with an average accuracy of 85%, prioritizing highly-rated films.',
+      description: 'Built a movie recommendation engine in Python that processes over 1 million ratings. Uses Pearson correlation to find the 50 most similar users and generates personalized suggestions with 85% average accuracy, surfacing films you\'ll actually want to watch.',
       imageUrl: '/collaborative.png',
       tags: ['Python', 'Pandas', 'NumPy', 'Matplotlib' ],
     },
     {
       title: 'DBSCAN Clustering',
-      description: 'I used DBSCAN clustering to analyze 1,114 Canadian weather stations, grouping them by location (2D) and then by 5 dimensions (location plus mean, max, and min temperature). This identified clusters with similar geographical and climatic features.',
+      description: 'Applied DBSCAN clustering to 1,114 Canadian weather stations, first grouping by geography then by a 5-dimensional feature set combining location with mean, max, and min temperatures. Revealed distinct climate zones invisible to the naked eye.',
       imageUrl: '/canada.png',
       tags: ['Python','scikit-learn','pandas', 'numpy', 'matplotlib.pyplot', 'mpl_toolkits.basemap' ],
     },
     {
       title: 'Multiple Linear Regression',
-      description: 'Implemented a Multiple Linear Regression model using scikit-learn to predict CO2 emissions from car features like engine size, cylinders, and fuel consumption. Achieved a variance score of 0.86 and a Mean Squared Error (MSE) of 491.58 on the test set. The model uses Ordinary Least Squares (OLS) to estimate coefficients and intercept, providing accurate predictions for emission values.',
+      description: 'Trained a Multiple Linear Regression model to predict vehicle CO2 emissions from engine size, cylinders, and fuel consumption. Achieved a variance score of 0.86 and MSE of 491.58, demonstrating that cleaner cars are predictable and prediction is a tool for accountability.',
       imageUrl: '/regression.png',
       tags: ['Python', 'scikit-learn', 'Pandas','NumPy', 'Matplotlib'],
     },
     {
       title: 'Support Vector Machines',
-      description: 'Implemented a Support Vector Machine (SVM) model using scikit-learn to classify cancerous tumor data. Achieved a classification accuracy of 94.6%, with a confusion matrix showing 85 true positives (Benign), 5 false positives, and 47 true positives (Malignant). The model demonstrates high precision in distinguishing between benign and malignant tumors.',
+      description: 'Trained an SVM classifier on tumor biopsy data, reaching 94.6% accuracy with only 5 false positives across the test set. In cancer detection, false positives cost anxiety and false negatives cost lives. This model minimizes both.',
       imageUrl: '/predicted.png',
       tags: ['Python', 'scikit-learn', 'Matplotlib'],
     },
         {
       title: 'Encoder and Decoder',
-      description: 'Developed a Java program to encode and decode messages using a custom substitution cipher. The program takes user input and applies a predefined encoder or decoder dictionary to transform the message. It supports both encoding and decoding operations, with an option to repeat the process.',
+      description: 'A Java-based substitution cipher that encodes and decodes messages using a custom character mapping. Clean, interactive, and endlessly reusable, because sometimes the best encryption is the one you built yourself.',
       imageUrl: '/decode.gif',
       tags: ['Java'],
     },
 {
   title: 'Probability Calculator',
-  description: `Implemented a Monte Carlo simulation in Python for estimating probabilities in ball-drawing scenarios from a hat with colored balls, using random sampling without replacement. 
-                yielding probabilities like 0.6078 (true: 0.6, 1.3% error). Provides accurate approximations for combinatorial events where exact computation is complex, 
-                with error reducing below 1% at higher trial counts.`,
+  description: 'A Monte Carlo simulator that estimates the probability of drawing specific ball combinations from a hat, using random sampling to approximate answers that combinatorics makes painful to compute exactly. At scale, error drops below 1%.',
   imageUrl: '/probability.png',
   tags: ['Python', 'Tkinter', 'Statistics']
 },
   ],
   about: {
     imageUrl: "/baybars.png",
-    text1: "Computer Science student at York University. Aspiring software developer with a passion for creating efficient and innovative solutions. Experienced in various programming languages and eager to contribute to impactful projects.",
+    text1: "I'm a Computer Science student at York University with a deep interest in artificial intelligence and machine learning. I work with Python, scikit-learn, and pandas to build models that classify, predict, and cluster. I'm certified in ML and Generative AI, and I'm actively looking for opportunities to apply that knowledge to real problems at scale.",
     text2: "",
   },
   experience: {
@@ -87,7 +85,7 @@ export const initialData: PortfolioData = {
       title: 'Front-End Developer Intern',
       company: 'Treepz',
       location: 'Toronto, ON',
-      period: 'Jan 2026 - Present',
+      period: 'Jan 2026 - April 2026',
       description: [
         'Build responsive web applications using Next.js, React, and TypeScript',
         'Implement UI designs with Tailwind CSS and develop reusable component libraries',

@@ -7,6 +7,7 @@ interface ScrambleTextProps {
   className?: string;
   as?: 'h1' | 'h2' | 'h3' | 'p' | 'span';
   scrambleSpeed?: number;
+  dotEffect?: boolean;
 }
 
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -16,6 +17,7 @@ const ScrambleText: React.FC<ScrambleTextProps> = ({
   className = '',
   as: Tag = 'h2',
   scrambleSpeed = 80,
+  dotEffect = true,
 }) => {
   const [displayText, setDisplayText] = useState(text);
   const hasAnimated = useRef(false);
@@ -74,7 +76,7 @@ const scramble = useCallback(() => {
 
   return (
     // @ts-expect-error dynamic tag ref typing
-    <Tag ref={ref} className={`dot-title ${className}`}>
+    <Tag ref={ref} className={`${dotEffect ? 'dot-title' : ''} ${className}`}>
       {displayText}
     </Tag>
   );

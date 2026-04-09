@@ -19,9 +19,10 @@ const Hero: React.FC<HeroProps> = ({ name, data }) => {
           {data.greeting}
         </p>
         <ScrambleText
-          text="Baybars"
+          text="BAYBARS"
           as="h1"
-          className="text-5xl sm:text-6xl md:text-8xl font-marques tracking-tighter mb-8"
+          dotEffect={false}
+          className="text-5xl sm:text-6xl md:text-8xl font-ostro tracking-tighter mb-8 normal-case"
         />
         <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-10">
           {data.description}

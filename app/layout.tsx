@@ -18,7 +18,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Sekuya&family=BJ+Cree:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://db.onlinewebfonts.com/c/f9ad3735a42ad7a8f71e0554ca1f78d5?family=FS+Ostro+Display+VF+Regular"
           rel="stylesheet"
         />
       </head>

@@ -17,6 +17,15 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
     { href: '#contact', label: 'CONTACT' },
   ];
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const target = document.querySelector(href);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-neutral-950/90 backdrop-blur-sm border-b border-white/10 opacity-0 animate-fade-in-up">
       <nav className="max-w-6xl mx-auto flex items-center justify-center px-6 py-4">
@@ -26,6 +35,7 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
             <li key={link.href}>
               <a
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="nav-link-animated inline-block text-gray-300 text-xs font-mono tracking-widest uppercase px-1 py-0.5 overflow-hidden"
               >
                 <span>{link.label}</span>
@@ -58,8 +68,8 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
             <li key={link.href}>
               <a
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="nav-link-animated inline-block py-2 px-3 text-gray-300 text-xs font-mono tracking-widest uppercase overflow-hidden"
-                onClick={() => setIsMenuOpen(false)}
               >
                 <span>{link.label}</span>
               </a>

@@ -28,6 +28,14 @@ html, body {
   font-display: swap;
 }
 
+@font-face {
+  font-family: "FS Ostro Display VF Regular";
+  src: url("/fonts/FSOstroDisplay.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Text selection highlight */
 ::selection {
   background-color: #b5651d;
