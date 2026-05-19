@@ -55,22 +55,10 @@ export function ScrollAnimations() {
         immediateRender: false,
         scrollTrigger: { trigger: '#projects', start: 'top 88%', once: true },
       });
-      gsap.from('#projects .grid > *', {
-        y: 60, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out',
+      gsap.from('#projects .project-row', {
+        y: 30, opacity: 0, duration: 0.7, stagger: 0.08, ease: 'power2.out',
         immediateRender: false,
-        scrollTrigger: { trigger: '#projects .grid', start: 'top 88%', once: true },
-      });
-
-      // Work Experience
-      gsap.from('#work-experience h2', {
-        x: -40, opacity: 0, duration: 0.9, ease: 'power3.out',
-        immediateRender: false,
-        scrollTrigger: { trigger: '#work-experience', start: 'top 88%', once: true },
-      });
-      gsap.from('#work-experience .space-y-12 > div', {
-        x: -50, opacity: 0, duration: 0.8, stagger: 0.12, ease: 'power2.out',
-        immediateRender: false,
-        scrollTrigger: { trigger: '#work-experience .space-y-12', start: 'top 88%', once: true },
+        scrollTrigger: { trigger: '#projects', start: 'top 85%', once: true },
       });
 
       // About
@@ -83,6 +71,18 @@ export function ScrollAnimations() {
         x: 50, opacity: 0, duration: 0.8, stagger: 0.2, ease: 'power2.out',
         immediateRender: false,
         scrollTrigger: { trigger: '#about', start: 'top 82%', once: true },
+      });
+
+      // Work Experience
+      gsap.from('#work-experience h2', {
+        y: 40, opacity: 0, duration: 0.9, ease: 'power3.out',
+        immediateRender: false,
+        scrollTrigger: { trigger: '#work-experience', start: 'top 85%', once: true },
+      });
+      gsap.from('.work-exp-entry', {
+        y: 50, opacity: 0, duration: 0.8, stagger: 0.15, ease: 'power2.out',
+        immediateRender: false,
+        scrollTrigger: { trigger: '#work-experience', start: 'top 80%', once: true },
       });
 
       // Certifications

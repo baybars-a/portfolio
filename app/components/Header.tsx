@@ -6,7 +6,7 @@ interface HeaderProps {
   data: { name: string; };
 }
 
-const Header: React.FC<HeaderProps> = ({ data }) => {
+const Header: React.FC<HeaderProps> = ({ data: _data }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ data }) => {
     { href: '#projects', label: 'PROJECTS' },
     { href: '#work-experience', label: 'EXPERIENCE' },
     { href: '#about', label: 'ABOUT' },
-    { href: '#contact', label: 'CONTACT' },
+    { href: '#certifications', label: 'CERTIFICATIONS' },
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {

@@ -23,6 +23,7 @@ export interface Project {
   description: string;
   imageUrl: string;
   tags: string[];
+  githubUrl?: string;
 }
 
 export interface PortfolioData {

@@ -30,10 +30,10 @@ const Hero: React.FC<HeroProps> = ({ name, data }) => {
 
         {/* Social Icons */}
         <div className="flex justify-center gap-5 mb-10">
-          <a href={data.socials.linkedin} aria-label="LinkedIn" className="text-gray-400 hover:text-accent transition-colors">
+          <a href={data.socials.linkedin} aria-label="LinkedIn" className="icon-link text-gray-400 hover:text-accent">
             <LinkedInIcon className="w-6 h-6" />
           </a>
-          <a href={data.socials.github} aria-label="GitHub" className="text-gray-400 hover:text-accent transition-colors">
+          <a href={data.socials.github} aria-label="GitHub" className="icon-link text-gray-400 hover:text-accent">
             <GithubIcon className="w-6 h-6" />
           </a>
         </div>
@@ -42,13 +42,13 @@ const Hero: React.FC<HeroProps> = ({ name, data }) => {
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <a
             href={data.resumeUrl}
-            className="bg-accent text-black font-mono text-sm font-bold tracking-widest py-3 px-8 hover:bg-accent/80 transition-colors"
+            className="btn-press bg-accent text-black font-mono text-sm font-bold tracking-widest py-3 px-8 hover:bg-accent/80"
           >
             RESUME
           </a>
           <a
             href={`mailto:${data.email}`}
-            className="border border-white text-white font-mono text-sm font-bold tracking-widest py-3 px-8 hover:bg-white hover:text-black transition-colors"
+            className="btn-press border border-white text-white font-mono text-sm font-bold tracking-widest py-3 px-8 hover:bg-white hover:text-black"
           >
             EMAIL ME
           </a>

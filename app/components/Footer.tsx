@@ -46,12 +46,12 @@ const Footer: React.FC<FooterProps> = ({ data, isEditMode, onUpdate }) => {
           {data.email}
         </a>
         <div className="flex justify-center gap-6 mt-10">
-          <a href={data.socials.linkedin} aria-label="LinkedIn" className="text-gray-400 hover:text-accent transition-colors">
+          {/* <a href={data.socials.linkedin} aria-label="LinkedIn" className="text-gray-400 hover:text-accent transition-colors">
             <LinkedInIcon className="w-6 h-6" />
           </a>
           <a href={`mailto:${data.email}`} aria-label="Email" className="text-gray-400 hover:text-accent transition-colors">
             <MailIcon className="w-6 h-6" />
-          </a>
+          </a> */}
         </div>
       </div>
     </footer>
