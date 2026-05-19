@@ -12,7 +12,7 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ name, data }) => {
   return (
-    <section id="home" className="relative flex flex-col items-center justify-center min-h-screen bg-black text-white px-6 overflow-hidden" style={{ willChange: 'filter', transform: 'translateZ(0)' }}>
+    <section id="home" className="relative flex flex-col items-center justify-center min-h-screen bg-black text-white px-6 overflow-hidden">
       <HeroDitheringBackground />
       <div id="hero-content" className="relative z-10 max-w-3xl mx-auto text-center">
         <p className="font-mono text-sm md:text-base tracking-wide text-gray-400 mb-4">

@@ -1,4 +1,4 @@
-import { useState, Suspense, lazy } from "react";
+import { useState, useEffect, useRef, Suspense, lazy } from "react";
 
 const Dithering = lazy(() =>
   import("@paper-design/shaders-react").then((mod) => ({ default: mod.Dithering }))
@@ -6,9 +6,23 @@ const Dithering = lazy(() =>
 
 export function HeroDitheringBackground() {
   const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { rootMargin: "100px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
+      ref={containerRef}
       className="absolute inset-0 z-0 pointer-events-none"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -20,7 +34,7 @@ export function HeroDitheringBackground() {
             colorFront="#EC4E02"
             shape="warp"
             type="4x4"
-            speed={isHovered ? 0.6 : 0.2}
+            speed={!isVisible ? 0 : isHovered ? 0.6 : 0.2}
             className="size-full"
             minPixelRatio={1}
           />

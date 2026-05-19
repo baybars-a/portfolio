@@ -22,35 +22,36 @@ const ScrambleText: React.FC<ScrambleTextProps> = ({
   const [displayText, setDisplayText] = useState(text);
   const hasAnimated = useRef(false);
   const ref = useRef<HTMLElement>(null);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const rafRef = useRef<number | null>(null);
 
-const scramble = useCallback(() => {
-  let index = 0;
+  const scramble = useCallback(() => {
+    let index = 0;
+    let lastTime = 0;
 
-  intervalRef.current = setInterval(() => {
-    setDisplayText((prev) =>
-      text
-        .split('')
-        .map((char, i) => {
-          if (char === ' ') return ' ';
-          if (i < index) return text[i];
-          return CHARS[Math.floor(Math.random() * CHARS.length)];
-        })
-        .join('')
-    );
-
-    index++;
-
-    if (index > text.length) {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
+    const tick = (timestamp: number) => {
+      if (timestamp - lastTime >= scrambleSpeed) {
+        lastTime = timestamp;
+        setDisplayText(
+          text
+            .split('')
+            .map((char, i) => {
+              if (char === ' ') return ' ';
+              if (i < index) return text[i];
+              return CHARS[Math.floor(Math.random() * CHARS.length)];
+            })
+            .join('')
+        );
+        index++;
+        if (index > text.length) {
+          setDisplayText(text);
+          return;
+        }
       }
-      setDisplayText(text);
-    }
-  }, scrambleSpeed);
-}, [text, scrambleSpeed]);
+      rafRef.current = requestAnimationFrame(tick);
+    };
 
+    rafRef.current = requestAnimationFrame(tick);
+  }, [text, scrambleSpeed]);
 
   useEffect(() => {
     const el = ref.current;
@@ -70,7 +71,7 @@ const scramble = useCallback(() => {
 
     return () => {
       observer.disconnect();
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [scramble]);
 

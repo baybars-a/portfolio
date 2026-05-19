@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useSpring } from 'framer-motion';
 import { Github } from 'lucide-react';
 import { Project } from '../../types';
@@ -20,9 +20,11 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
 
   const mouseX = useSpring(0, { stiffness: 600, damping: 55 });
   const mouseY = useSpring(0, { stiffness: 600, damping: 55 });
+  const activeIndexRef = useRef<number | null>(null);
 
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
+      if (activeIndexRef.current === null) return;
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
     };
@@ -31,6 +33,7 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
   }, [mouseX, mouseY]);
 
   useEffect(() => {
+    activeIndexRef.current = activeIndex;
     if (activeIndex !== null) setDisplayIndex(activeIndex);
   }, [activeIndex]);
 

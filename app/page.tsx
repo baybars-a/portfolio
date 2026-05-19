@@ -8,7 +8,6 @@ import WorkExperience from './components/WorkExperience';
 import About from './components/About';
 import PortfolioHeroWithPaperShaders from '../components/ui/portfolio-hero-with-paper-shaders';
 import { initialData } from '../constants/constants';
-import { SmoothScroll } from './components/SmoothScroll';
 import FlowArt, { FlowSection } from '../components/ui/story-scroll';
 
 const noop = () => {};
@@ -18,7 +17,6 @@ const Home: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <SmoothScroll />
       <Header data={header} />
       <FlowArt aria-label="Portfolio">
         <FlowSection bare aria-label="Hero" style={{ backgroundColor: '#000000' }}>
