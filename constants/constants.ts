@@ -84,15 +84,16 @@ export const initialData: PortfolioData = {
   },
   workExperience: [
     {
-      title: 'Front-End Developer Intern',
+      title: 'Software Engineering Intern',
       company: 'Treepz',
       location: 'Toronto, ON',
-      period: 'Jan 2026 - Present',
+      period: 'Jan 2026 - April 2026',
       description: [
-        'Build responsive web applications using Next.js, React, and TypeScript',
-        'Implement UI designs with Tailwind CSS and develop reusable component libraries',
-        'Integrate RESTful APIs and optimize application performance',
-        'Collaborate with cross-functional teams and participate in code reviews',
+        'Built production-ready, responsive interfaces with Next.js, React, and TypeScript, using server-side rendering and dynamic routing while following accessibility best practices',
+        'Created and maintained a reusable Tailwind CSS component library and design tokens to ensure UI consistency and accelerate development',
+        'Integrated and tested RESTful APIs, implemented client-side caching and performance improvements (code-splitting, lazy loading, image optimization)',
+        'Collaborated in cross-functional teams—leading code reviews, participating in design critiques, and delivering features through Git and CI-driven workflows',
+        'Deployed applications to cloud platforms and containerized environments; configured CI/CD pipelines for automated builds, previews, and releases',
       ],
     },
   ],
