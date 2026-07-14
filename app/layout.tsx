@@ -10,10 +10,15 @@ export const metadata: Metadata = {
 
 // viewport-fit=cover extends the layout viewport under the iOS status
 // bar / notch so the fixed CRT overlay tints the entire screen.
+// themeColor makes iOS Safari paint its status bar / toolbar chrome as
+// a solid CRT-dark band instead of a translucent strip that shows
+// untinted page content (Safari composites that strip itself from the
+// document layer only — fixed overlays can never cover it).
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: "#0d0602",
 };
 
 export default function RootLayout({
