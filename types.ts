@@ -24,6 +24,10 @@ export interface Project {
   imageUrl: string;
   tags: string[];
   githubUrl?: string;
+  /** Command-style name shown in the man-page view, e.g. "colorize". */
+  manName?: string;
+  /** SYNOPSIS line for the man-page view. */
+  synopsis?: string;
 }
 
 export interface PortfolioData {

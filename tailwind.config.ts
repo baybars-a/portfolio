@@ -9,11 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        accent: '#b5651d',
+        accent: '#ff8100',
       },
       fontFamily: {
-        mono: ['"Space Mono"', 'monospace'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['"VT323"', '"Space Mono"', 'monospace'],
+        sans: ['"VT323"', 'Inter', 'system-ui', 'sans-serif'],
         bluescreen: ['"BlueScreen"', 'cursive'],
         marques: ['"MarquesRoundedDisco"', 'cursive'],
         ostro: ['"FS Ostro Display VF Regular"', 'serif'],

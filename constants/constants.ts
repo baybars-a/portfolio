@@ -20,43 +20,48 @@ export const initialData: PortfolioData = {
   projects: [
     {
       title: 'Algorithmic Trading Research Platform',
-      description: 'End-to-end quantitative trading system built on a 459,000-candle data pipeline with a 29-feature ensemble (XGBoost, RF, GBM, ET, Ridge). Validated via purged walk-forward CV with bootstrap confidence intervals and PBO measurement. Implements López de Prado\'s purged K-fold CV with triple-barrier labeling and embargo periods to eliminate label leakage in time-series ML models.',
+      description: '',
       imageUrl: '',
-      tags: ['Python', 'Machine Learning', 'XGBoost', 'Market Microstructure'],
+      tags: [],
+      manName: 'quant-research',
+      synopsis:
+        'quant-research [--candles 459000] [--features 29] [--models xgboost,rf,gbm,et,ridge] [--cv purged-walk-forward] [--labeling triple-barrier] [--report pbo,bootstrap-ci]',
     },
     {
       title: 'Black & White Image Colorizer',
-      description: 'Full-stack AI app that restores color to grayscale images using the Zhang et al. deep learning model. A FastAPI backend runs a Caffe network — converting images through LAB color space, predicting 313 AB color bins, and returning a colorized JPEG in under a second.',
+      description: '',
       imageUrl: '',
-      tags: ['TypeScript', 'Python', 'FastAPI', 'OpenCV', 'React'],
+      tags: [],
       githubUrl: 'https://github.com/baybars-a/blacknwhite-colorization',
+      manName: 'colorize',
+      synopsis:
+        'colorize [-i grayscale.jpg] [-o color.jpg] [--model zhang-et-al] [--colorspace lab] [--ab-bins 313] [--backend fastapi]',
     },
     {
       title: 'Facial Expression Recognition',
-      description: 'Detects faces via webcam and classifies emotions in real-time. A computer vision pipeline that captures frames, isolates face regions, and runs them through a trained classifier — outputting the detected emotion live on screen.',
+      description: '',
       imageUrl: '',
-      tags: ['Python', 'OpenCV', 'MediaPipe', 'Deep Learning'],
+      tags: [],
       githubUrl: 'https://github.com/baybars-a/Facial-Expression-Recognition',
+      manName: 'emotion-detect',
+      synopsis:
+        'emotion-detect [--source webcam] [--detect faces] [--classify emotion] [--display live]',
     },
     {
       title: 'Hand Tracker',
-      description: 'Real-time hand tracking app that lets you draw using your index finger. MediaPipe detects 21 hand landmarks per frame and maps fingertip movement to canvas coordinates — turning any webcam into a touchless drawing surface.',
+      description: '',
       imageUrl: '',
-      tags: ['Python', 'MediaPipe', 'OpenCV'],
+      tags: [],
       githubUrl: 'https://github.com/baybars-a/hand-tracker',
-    },
-    {
-      title: 'Time Calculator',
-      description: 'A Python utility that performs arithmetic on time strings — adding and subtracting durations, handling AM/PM periods, and computing the resulting day of the week. Handles edge cases like midnight rollovers and multi-day additions.',
-      imageUrl: '',
-      tags: ['Python'],
-      githubUrl: 'https://github.com/baybars-a/Time-Calculator-Project',
+      manName: 'handtrack',
+      synopsis:
+        'handtrack [--landmarks 21] [--input webcam] [--mode draw] [--pointer index-finger]',
     },
   ],
   about: {
     imageUrl: "/baybars.png",
-    text1: "I'm a Computer Science student at York University with a deep interest in artificial intelligence and machine learning. I work with Python, scikit-learn, and pandas to build models that classify, predict, and cluster. I'm certified in ML and Generative AI, and I'm actively looking for opportunities to apply that knowledge to real problems at scale.",
-    text2: "",
+    text1: "I'm Baybars a Computer Science student at York University who spends most of his screen time teaching machines to find structure in noise. My home turf is the Python ML stack, and my favorite problems are the ones where the data fights back: leaky time series, imbalanced labels, markets that punish overfitting. My trading research platform runs a 29-feature ensemble through purged walk-forward validation, because a backtest you can't trust is just fiction with charts.",
+    text2: "Right now I'm a software engineering intern at Treepz in Toronto, shipping type-safe API layers and production Next.js. Off the clock I'm certified in machine learning and generative AI through IBM and Databricks, and I build things that see, restoring color to black-and-white photos, reading emotion from faces, turning a webcam into a sketchpad. What I'm after next: problems where models stop being demos and start making decisions.",
   },
   experience: {
     resumeUrl: "https://drive.google.com/file/d/1DDzZLer6Pv6LJuq1yjDi6yD_gHqtGF5P/view?usp=sharing",
@@ -83,13 +88,14 @@ export const initialData: PortfolioData = {
       title: 'Software Engineering Intern',
       company: 'Treepz',
       location: 'Toronto, ON',
-      period: 'Jan 2026 - April 2026',
+      period: 'Jan 2026 - Aug 2026',
       description: [
-        'Built production-ready, responsive interfaces with Next.js, React, and TypeScript, using server-side rendering and dynamic routing while following accessibility best practices',
-        'Created and maintained a reusable Tailwind CSS component library and design tokens to ensure UI consistency and accelerate development',
-        'Integrated and tested RESTful APIs, implemented client-side caching and performance improvements (code-splitting, lazy loading, image optimization)',
-        'Collaborated in cross-functional teams—leading code reviews, participating in design critiques, and delivering features through Git and CI-driven workflows',
-        'Deployed applications to cloud platforms and containerized environments; configured CI/CD pipelines for automated builds, previews, and releases'
+        'Architected a type-safe API service layer spanning 10 files for a Strapi CMS migration, building a complete TypeScript interface system, 7+ high-level API methods (post retrieval, filtering, pagination, static generation support), and standardized response contracts with type guards that eliminated an entire class of null-reference errors at compile time',
+        'Designed data transformation mappers to flatten Strapi\'s deeply nested response structure into clean application models, implementing fallback chains for missing fields to prevent malformed data from ever reaching the UI',
+        'Implemented Static Site Generation with Incremental Static Regeneration (revalidating every 3600 seconds), replacing a manual JSON-based publishing workflow and cutting content publishing time from roughly 2-3 days down to under 10 minutes',
+        'Added dynamic SEO infrastructure including JSON-LD structured data, a programmatically generated sitemap, and per-page metadata',
+        'Collaborated with a fellow intern on a shared dashboard search feature, owning backend filtering logic and API contract',
+        'Followed a feature-branch Git workflow, submitting weekly pull requests for senior engineer review and incorporating feedback before merge'
       ],
     },
   ],

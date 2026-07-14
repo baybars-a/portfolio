@@ -34,7 +34,8 @@ export default function PortfolioHeroWithPaperShaders() {
   return (
     <div ref={sectionRef} id="certifications" className="relative min-h-screen overflow-hidden flex bg-brown-dark">
       {/* Left panel — full width on mobile, half on desktop */}
-      <div className="w-full md:w-1/2 p-4 md:p-8 font-mono relative z-10 text-white">
+      {/* Extra left/top padding keeps text clear of the CRT bezel's curve. */}
+      <div className="w-full md:w-1/2 py-10 pl-12 pr-4 md:py-14 md:pl-20 md:pr-8 font-mono relative z-10 text-white">
 
         {/* Header */}
         <div className="mb-6 md:mb-12">
@@ -56,7 +57,7 @@ export default function PortfolioHeroWithPaperShaders() {
         </div>
 
         {/* Footer Links */}
-        <div className="absolute bottom-4 md:bottom-8 left-4 md:left-8">
+        <div className="absolute bottom-10 md:bottom-14 left-12 md:left-20">
           <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm md:text-lg font-mono">
             <a href="https://www.linkedin.com/in/baybars-alzibdeh" target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-60">LinkedIn</a>
             <a href="https://github.com/baybars-a/" target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-60">GitHub</a>

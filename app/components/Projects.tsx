@@ -5,6 +5,7 @@ import { motion, useSpring } from 'framer-motion';
 import { Github } from 'lucide-react';
 import { Project } from '../../types';
 import ScrambleText from './ScrambleText';
+import ProjectManPage from './ProjectManPage';
 
 interface ProjectsProps {
   data: Project[];
@@ -17,6 +18,7 @@ interface ProjectsProps {
 const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, onRemove }) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [displayIndex, setDisplayIndex] = useState<number>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const mouseX = useSpring(0, { stiffness: 600, damping: 55 });
   const mouseY = useSpring(0, { stiffness: 600, damping: 55 });
@@ -93,9 +95,19 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
         {data.map((project, index) => (
           <div
             key={index}
-            className="project-row group border-t border-white/10 py-5 md:py-7"
+            role="button"
+            tabIndex={0}
+            aria-label={`Open manual page for ${project.title}`}
+            className="project-row group border-t border-white/10 py-5 md:py-7 cursor-pointer"
             onMouseEnter={() => setActiveIndex(index)}
             onMouseLeave={() => setActiveIndex(null)}
+            onClick={() => setOpenIndex(index)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setOpenIndex(index);
+              }
+            }}
           >
             <div className="flex items-start gap-4 md:gap-8">
               {/* Index */}
@@ -105,14 +117,16 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
 
               {/* Title + description */}
               <div className="flex-1 min-w-0">
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-ostro text-white tracking-tight
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-mono text-white tracking-tight
                                leading-tight transition-colors duration-300 group-hover:text-accent">
                   {project.title}
                 </h3>
-                <p className="text-xs md:text-sm font-mono text-white/30 mt-1.5 leading-relaxed
-                              line-clamp-1 transition-colors duration-300 group-hover:text-white/55">
-                  {project.description}
-                </p>
+                {project.description && (
+                  <p className="text-xs md:text-sm font-mono text-white/30 mt-1.5 leading-relaxed
+                                line-clamp-1 transition-colors duration-300 group-hover:text-white/55">
+                    {project.description}
+                  </p>
+                )}
               </div>
 
               {/* Tags — large screens only */}
@@ -126,6 +140,15 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
                   </span>
                 ))}
               </div>
+
+              {/* man-page hint on hover */}
+              <span
+                className="hidden md:inline font-mono text-xs text-transparent group-hover:text-[#6dff8c]/80
+                           transition-colors duration-300 flex-shrink-0 pt-[6px] select-none"
+                aria-hidden="true"
+              >
+                man {project.manName ?? 'page'}
+              </span>
 
               {/* GitHub */}
               {project.githubUrl && (
@@ -145,6 +168,14 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
         ))}
         <div className="border-t border-white/10" />
       </div>
+
+      {openIndex !== null && data[openIndex] && (
+        <ProjectManPage
+          project={data[openIndex]}
+          index={openIndex}
+          onClose={() => setOpenIndex(null)}
+        />
+      )}
     </section>
   );
 };

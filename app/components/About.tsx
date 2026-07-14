@@ -15,11 +15,12 @@ const About: React.FC<AboutProps> = ({ data, isEditMode, onUpdate }) => {
     <section id="about" className="py-20 md:py-32 max-w-6xl mx-auto px-6">
       <div className="flex flex-col md:flex-row items-center gap-16">
         <div className="md:w-1/3">
-          <div className="aspect-square rounded-full overflow-hidden w-48 h-48 md:w-64 md:h-64 mx-auto border-4 border-white/10">
+          <div className="aspect-square rounded-full overflow-hidden w-48 h-48 md:w-64 md:h-64 mx-auto border-4 border-accent/20 bg-black">
             <img
               src="./baybars.png"
-              alt="Baybars Al-Zibdeh"
+              alt="Baybars Al-Zibdeh, 1-bit dithered portrait in phosphor amber"
               className="w-full h-full object-cover"
+              style={{ imageRendering: 'pixelated' }}
             />
           </div>
           {isEditMode && <LocalInput type="text" value={data.imageUrl} onCommit={val => onUpdate('about.imageUrl', val)} className="w-full bg-neutral-800 text-white p-1 mt-2 text-xs border border-white/10" aria-label="About Me Image URL" />}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { initialData } from "../constants/constants";
 import { ThemeProvider } from "next-themes";
+import CRTOverlay from "../components/crt/CRTOverlay";
 
 export const metadata: Metadata = {
   title: `${initialData.name} | Personal Portfolio`,
@@ -18,7 +19,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Sekuya&family=BJ+Cree:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=VT323&family=Sekuya&family=BJ+Cree:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
         <link
@@ -30,6 +31,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
           {children}
         </ThemeProvider>
+        <CRTOverlay />
       </body>
     </html>
   );
