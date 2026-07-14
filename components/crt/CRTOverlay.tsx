@@ -240,7 +240,13 @@ export default function CRTOverlay() {
 
       {/* 3. CRT frame: shader when WebGL is available, CSS fallback otherwise. */}
       {features.webgl ? (
-        <canvas ref={canvasRef} style={{ ...layer, display: 'block' }} />
+        <canvas
+          ref={canvasRef}
+          // Canvas is a replaced element: left/right don't stretch it,
+          // so it needs an explicit CSS size or it collapses to its
+          // intrinsic buffer size.
+          style={{ ...layer, display: 'block', width: '100vw', height: '100lvh' }}
+        />
       ) : (
         <div
           style={{

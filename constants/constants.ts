@@ -57,6 +57,16 @@ export const initialData: PortfolioData = {
       synopsis:
         'handtrack [--landmarks 21] [--input webcam] [--mode draw] [--pointer index-finger]',
     },
+    {
+      title: 'UniQ — University Policy RAG System',
+      description: '',
+      imageUrl: '',
+      tags: ['Python', 'ChromaDB', 'OpenAI', 'Streamlit', 'Docker'],
+      githubUrl: 'https://github.com/baybars-a/RAG-System',
+      manName: 'uniq',
+      synopsis:
+        'uniq [--ingest pdf,txt,md] [--retrieve bm25,vector] [--fusion rrf:k=60] [--rerank ms-marco-minilm] [--llm gpt-4o-mini] [--eval ragas:faithfulness>=0.90]',
+    },
   ],
   about: {
     imageUrl: "/baybars.png",
@@ -88,7 +98,7 @@ export const initialData: PortfolioData = {
       title: 'Software Engineering Intern',
       company: 'Treepz',
       location: 'Toronto, ON',
-      period: 'Jan 2026 - Aug 2026',
+      period: 'Jan 2026 - May 2026',
       description: [
         'Architected a type-safe API service layer spanning 10 files for a Strapi CMS migration, building a complete TypeScript interface system, 7+ high-level API methods (post retrieval, filtering, pagination, static generation support), and standardized response contracts with type guards that eliminated an entire class of null-reference errors at compile time',
         'Designed data transformation mappers to flatten Strapi\'s deeply nested response structure into clean application models, implementing fallback chains for missing fields to prevent malformed data from ever reaching the UI',

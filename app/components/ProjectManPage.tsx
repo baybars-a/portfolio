@@ -94,7 +94,12 @@ const ProjectManPage: React.FC<ProjectManPageProps> = ({ project, index, onClose
 
           <h2 className="uppercase tracking-wider mb-1 text-accent">Name</h2>
           <p className="pl-6 md:pl-10 mb-6 text-accent/90">
-            {name} — {project.title.toLowerCase()}
+            {name} —{' '}
+            {project.title
+              .toLowerCase()
+              // drop a leading "name —" so titles that start with the
+              // command don't read "uniq — uniq — ..."
+              .replace(new RegExp(`^${name}\\s*[—–-]\\s*`, 'i'), '')}
           </p>
 
           {project.synopsis && (
