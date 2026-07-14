@@ -22,7 +22,7 @@ export const initialData: PortfolioData = {
       title: 'Algorithmic Trading Research Platform',
       description: '',
       imageUrl: '',
-      tags: [],
+      tags: ['Python', 'Machine Learning', 'XGBoost', 'Market Microstructure'],
       manName: 'quant-research',
       synopsis:
         'quant-research [--candles 459000] [--features 29] [--models xgboost,rf,gbm,et,ridge] [--cv purged-walk-forward] [--labeling triple-barrier] [--report pbo,bootstrap-ci]',
@@ -31,7 +31,7 @@ export const initialData: PortfolioData = {
       title: 'Black & White Image Colorizer',
       description: '',
       imageUrl: '',
-      tags: [],
+      tags: ['TypeScript', 'Python', 'FastAPI', 'OpenCV', 'React'],
       githubUrl: 'https://github.com/baybars-a/blacknwhite-colorization',
       manName: 'colorize',
       synopsis:
@@ -41,7 +41,7 @@ export const initialData: PortfolioData = {
       title: 'Facial Expression Recognition',
       description: '',
       imageUrl: '',
-      tags: [],
+      tags: ['Python', 'OpenCV', 'MediaPipe', 'Deep Learning'],
       githubUrl: 'https://github.com/baybars-a/Facial-Expression-Recognition',
       manName: 'emotion-detect',
       synopsis:
@@ -51,7 +51,7 @@ export const initialData: PortfolioData = {
       title: 'Hand Tracker',
       description: '',
       imageUrl: '',
-      tags: [],
+      tags: ['Python', 'MediaPipe', 'OpenCV'],
       githubUrl: 'https://github.com/baybars-a/hand-tracker',
       manName: 'handtrack',
       synopsis:
@@ -60,7 +60,7 @@ export const initialData: PortfolioData = {
   ],
   about: {
     imageUrl: "/baybars.png",
-    text1: "I'm Baybars a Computer Science student at York University who spends most of his screen time teaching machines to find structure in noise. My home turf is the Python ML stack, and my favorite problems are the ones where the data fights back: leaky time series, imbalanced labels, markets that punish overfitting. My trading research platform runs a 29-feature ensemble through purged walk-forward validation, because a backtest you can't trust is just fiction with charts.",
+    text1: "I'm Baybars, a Computer Science student at York University who spends most of his screen time teaching machines to find structure in noise. My home turf is the Python ML stack, and my favorite problems are the ones where the data fights back: leaky time series, imbalanced labels, markets that punish overfitting. My trading research platform runs a 29-feature ensemble through purged walk-forward validation, because a backtest you can't trust is just fiction with charts.",
     text2: "Right now I'm a software engineering intern at Treepz in Toronto, shipping type-safe API layers and production Next.js. Off the clock I'm certified in machine learning and generative AI through IBM and Databricks, and I build things that see, restoring color to black-and-white photos, reading emotion from faces, turning a webcam into a sketchpad. What I'm after next: problems where models stop being demos and start making decisions.",
   },
   experience: {

@@ -160,7 +160,13 @@ export default function CRTOverlay() {
     const render = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       renderer.setPixelRatio(dpr);
-      renderer.setSize(window.innerWidth, window.innerHeight, false);
+      // Size from the element's own box (100lvh) rather than the
+      // window, so the buffer matches what is actually displayed.
+      renderer.setSize(
+        canvas.clientWidth || window.innerWidth,
+        canvas.clientHeight || window.innerHeight,
+        false
+      );
       const size = new THREE.Vector2();
       renderer.getDrawingBufferSize(size);
       uniforms.uResolution.value.copy(size);
@@ -183,9 +189,15 @@ export default function CRTOverlay() {
 
   if (!CRT_CONFIG.enabled || features === null) return null;
 
+  // 100lvh (largest viewport) keeps coverage during iOS toolbar
+  // collapse/expand; minHeight is the fallback for older browsers.
   const layer: React.CSSProperties = {
     position: 'fixed',
-    inset: 0,
+    top: 0,
+    left: 0,
+    right: 0,
+    minHeight: '100vh',
+    height: '100lvh',
     zIndex: OVERLAY_Z,
     pointerEvents: 'none',
   };
@@ -228,10 +240,7 @@ export default function CRTOverlay() {
 
       {/* 3. CRT frame: shader when WebGL is available, CSS fallback otherwise. */}
       {features.webgl ? (
-        <canvas
-          ref={canvasRef}
-          style={{ ...layer, display: 'block', width: '100%', height: '100%' }}
-        />
+        <canvas ref={canvasRef} style={{ ...layer, display: 'block' }} />
       ) : (
         <div
           style={{

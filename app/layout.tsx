@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { initialData } from "../constants/constants";
 import { ThemeProvider } from "next-themes";
@@ -6,6 +6,14 @@ import CRTOverlay from "../components/crt/CRTOverlay";
 
 export const metadata: Metadata = {
   title: `${initialData.name} | Personal Portfolio`,
+};
+
+// viewport-fit=cover extends the layout viewport under the iOS status
+// bar / notch so the fixed CRT overlay tints the entire screen.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

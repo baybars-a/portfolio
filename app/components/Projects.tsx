@@ -129,18 +129,6 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
                 )}
               </div>
 
-              {/* Tags — large screens only */}
-              <div className="hidden lg:flex gap-x-4 items-center flex-shrink-0 pt-[6px]">
-                {project.tags.slice(0, 3).map((tag, i) => (
-                  <span
-                    key={i}
-                    className="text-xs font-mono text-white/25 transition-colors duration-300 group-hover:text-white/55"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
               {/* man-page hint on hover */}
               <span
                 className="hidden md:inline font-mono text-xs text-transparent group-hover:text-[#6dff8c]/80
