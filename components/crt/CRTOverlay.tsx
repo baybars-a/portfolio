@@ -110,9 +110,17 @@ export default function CRTOverlay() {
     webgl: boolean;
     backdrop: boolean;
   } | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setFeatures({ webgl: supportsWebGL(), backdrop: supportsBackdropFilter() });
+    const mq = window.matchMedia(
+      `(max-width: ${CRT_CONFIG.bezelMinWidthPx - 1}px)`
+    );
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
   }, []);
 
   const webglReady = CRT_CONFIG.enabled && features?.webgl === true;
@@ -189,18 +197,34 @@ export default function CRTOverlay() {
 
   if (!CRT_CONFIG.enabled || features === null) return null;
 
-  // 100lvh (largest viewport) keeps coverage during iOS toolbar
-  // collapse/expand; minHeight is the fallback for older browsers.
-  const layer: React.CSSProperties = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    minHeight: '100vh',
-    height: '100lvh',
-    zIndex: OVERLAY_Z,
-    pointerEvents: 'none',
-  };
+  // Mobile: bleed far past every edge. Status bars, notches, and
+  // collapsing URL bars sit OUTSIDE the layout viewport and behave
+  // differently in every mobile browser, so oversizing the (uniform)
+  // layers is the only strategy that covers all of them. The bezel is
+  // off on mobile, so nothing visible depends on exact edges.
+  // Desktop: exact viewport fit so the curved bezel hugs the window.
+  const layer: React.CSSProperties = isMobile
+    ? {
+        position: 'fixed',
+        top: 'calc(-1 * (env(safe-area-inset-top, 0px) + 120px))',
+        left: 0,
+        right: 0,
+        minHeight: 'calc(100vh + 280px)',
+        height:
+          'calc(100lvh + env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px) + 280px)',
+        zIndex: OVERLAY_Z,
+        pointerEvents: 'none',
+      }
+    : {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        minHeight: '100vh',
+        height: '100lvh',
+        zIndex: OVERLAY_Z,
+        pointerEvents: 'none',
+      };
 
   const tintFilter = [
     `grayscale(${CRT_CONFIG.chroma})`,
@@ -243,9 +267,10 @@ export default function CRTOverlay() {
         <canvas
           ref={canvasRef}
           // Canvas is a replaced element: left/right don't stretch it,
-          // so it needs an explicit CSS size or it collapses to its
-          // intrinsic buffer size.
-          style={{ ...layer, display: 'block', width: '100vw', height: '100lvh' }}
+          // so it needs an explicit width or it collapses to its
+          // intrinsic buffer size. Height comes from `layer` (exact
+          // viewport on desktop, oversized bleed on mobile).
+          style={{ ...layer, display: 'block', width: '100vw' }}
         />
       ) : (
         <div
