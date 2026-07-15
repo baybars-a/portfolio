@@ -65,18 +65,12 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
                 {String(index + 1).padStart(2, '0')}
               </span>
 
-              {/* Title + description */}
+              {/* Title */}
               <div className="flex-1 min-w-0">
                 <h3 className="text-xl md:text-2xl lg:text-3xl font-mono text-crt-bright tracking-tight
                                leading-tight transition-colors duration-300 group-hover:text-accent">
                   {project.title}
                 </h3>
-                {project.description && (
-                  <p className="text-xs md:text-sm font-mono text-crt-faint mt-1.5 leading-relaxed
-                                line-clamp-1 transition-colors duration-300 group-hover:text-crt-dim">
-                    {project.description}
-                  </p>
-                )}
               </div>
 
               {/* man-page hint on hover */}

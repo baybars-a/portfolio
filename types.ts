@@ -28,6 +28,8 @@ export interface Project {
   manName?: string;
   /** SYNOPSIS line for the man-page view. */
   synopsis?: string;
+  /** RESULTS line for the man-page view — the outcome / what shipped. */
+  result?: string;
 }
 
 export interface PortfolioData {

@@ -122,6 +122,13 @@ const ProjectManPage: React.FC<ProjectManPageProps> = ({ project, index, onClose
             </>
           )}
 
+          {project.result && (
+            <>
+              <h2 className="uppercase tracking-wider mb-1 text-accent">Results</h2>
+              <p className="pl-6 md:pl-10 mb-6 text-accent/90">{project.result}</p>
+            </>
+          )}
+
           <h2 className="uppercase tracking-wider mb-1 text-accent">Environment</h2>
           <p className="pl-6 md:pl-10 mb-6 text-accent/90">{project.tags.join(', ')}</p>
 
