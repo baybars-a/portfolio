@@ -14,6 +14,9 @@ html, body {
   overflow-x: hidden;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
+  /* Pure black so Safari's chrome, its collapsed URL pill, and the
+     rubber-band overscroll zones blend into one slim dark strip. */
+  background-color: #000000;
 }
 
 ::-webkit-scrollbar {
