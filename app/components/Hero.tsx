@@ -1,6 +1,4 @@
 import React from 'react';
-import { LinkedInIcon } from './icons/LinkedInIcon';
-import { GithubIcon } from './icons/GithubIcon';
 import { PortfolioData } from '../../types';
 import { HeroDitheringBackground } from '../../components/ui/hero-dithering-card';
 
@@ -24,7 +22,7 @@ const Hero: React.FC<HeroProps> = ({ name, data }) => {
     <section id="home" className="relative flex flex-col items-center justify-center min-h-screen bg-black text-white px-6 overflow-hidden">
       <HeroDitheringBackground />
       <div id="hero-content" className="relative z-10 max-w-3xl mx-auto text-center">
-        <p className="font-mono text-sm md:text-base tracking-wide text-[#6dff8c]/80 mb-4">
+        <p className="font-mono text-sm md:text-base tracking-wide text-crt-green/80 mb-4">
           {data.greeting}
         </p>
         <h1 aria-label="BAYBARS" className="mb-8 flex justify-center">
@@ -34,7 +32,7 @@ const Hero: React.FC<HeroProps> = ({ name, data }) => {
             style={{
               fontFamily:
                 'Consolas, Menlo, "DejaVu Sans Mono", "Liberation Mono", monospace',
-              fontSize: 'clamp(4.5px, 1.9vw, 15px)',
+              fontSize: 'clamp(4.5px, 1.9vw, 19px)',
               lineHeight: 1,
               textShadow:
                 '0 0 8px rgba(255, 129, 0, 0.55), 0 0 28px rgba(255, 129, 0, 0.3)',
@@ -43,17 +41,27 @@ const Hero: React.FC<HeroProps> = ({ name, data }) => {
             {BAYBARS_ASCII}
           </pre>
         </h1>
-        <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-10">
+        <p className="text-crt-text text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-10">
           {data.description}
         </p>
 
-        {/* Social Icons */}
-        <div className="flex justify-center gap-5 mb-10">
-          <a href={data.socials.linkedin} aria-label="LinkedIn" className="icon-link text-gray-400 hover:text-accent">
-            <LinkedInIcon className="w-6 h-6" />
+        {/* Social links — terminal bracket tokens */}
+        <div className="flex justify-center gap-4 mb-10 font-mono text-sm md:text-base">
+          <a
+            href={data.socials.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-press text-crt-dim hover:bg-accent hover:text-black transition-colors px-1"
+          >
+            [ linkedin ]
           </a>
-          <a href={data.socials.github} aria-label="GitHub" className="icon-link text-gray-400 hover:text-accent">
-            <GithubIcon className="w-6 h-6" />
+          <a
+            href={data.socials.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-press text-crt-dim hover:bg-accent hover:text-black transition-colors px-1"
+          >
+            [ github ]
           </a>
         </div>
 
@@ -67,7 +75,7 @@ const Hero: React.FC<HeroProps> = ({ name, data }) => {
           </a>
           <a
             href={`mailto:${data.email}`}
-            className="btn-press border border-white text-white font-mono text-sm font-bold tracking-widest py-3 px-8 hover:bg-white hover:text-black"
+            className="btn-press border border-accent text-accent font-mono text-sm font-bold tracking-widest py-3 px-8 hover:bg-accent hover:text-black"
           >
             EMAIL ME
           </a>

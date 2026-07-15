@@ -16,11 +16,20 @@ const certifications = [
   { company: "Microsoft",    role: "Foundational C# with Microsoft",                  },
 ]
 
+const links = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/baybars-alzibdeh" },
+  { label: "GitHub", href: "https://github.com/baybars-a/" },
+  { label: "Email", href: "mailto:baybarsbahaa@gmail.com" },
+  { label: "Resume", href: "https://drive.google.com/file/d/1DDzZLer6Pv6LJuq1yjDi6yD_gHqtGF5P/view" },
+]
+
 export default function PortfolioHeroWithPaperShaders() {
   const [isVisible, setIsVisible] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     const el = sectionRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -34,36 +43,44 @@ export default function PortfolioHeroWithPaperShaders() {
   return (
     <div ref={sectionRef} id="certifications" className="relative min-h-screen overflow-hidden flex bg-brown-dark">
       {/* Left panel — full width on mobile, half on desktop */}
-      {/* Extra left/top padding keeps text clear of the CRT bezel's curve. */}
-      <div className="w-full md:w-1/2 py-10 pl-12 pr-4 md:py-14 md:pl-20 md:pr-8 font-mono relative z-10 text-white">
+      <div className="w-full md:w-1/2 py-10 pl-12 pr-4 md:py-14 md:pl-20 md:pr-8 font-mono relative z-10 text-crt-text flex flex-col">
 
         {/* Header */}
-        <div className="mb-6 md:mb-12">
-          <h1 className="text-sm md:text-lg font-normal mb-4 md:mb-8"> </h1>
-          <div className="mb-4 md:mb-8">
-            <h2 className="text-sm md:text-lg font-normal">BAYBARS AL-ZIBDEH</h2>
-            <h3 className="text-sm md:text-lg font-normal">CERTIFICATIONS</h3>
-          </div>
-        </div>
+        <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-crt-bright mb-2">
+          CONTACT
+        </h2>
+        <p className="text-sm md:text-base text-crt-dim mb-8 md:mb-10">
+          Baybars Al-Zibdeh — open to ML / software roles
+        </p>
 
-        {/* Certifications list */}
-        <div className="mb-12 space-y-1 text-sm md:text-base">
-          {certifications.map((item, i) => (
-            <div key={i} className="flex">
-              <span className="w-28 md:w-44 shrink-0">{item.company}</span>
-              <span>{item.role}</span>
+        {/* Contact links — prompt style */}
+        <div className="mb-10 md:mb-14 space-y-1.5 text-sm md:text-base">
+          {links.map((link) => (
+            <div key={link.label} className="flex items-baseline gap-2">
+              <span className="text-crt-green/80 select-none">$</span>
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-crt-bright underline decoration-accent/40 underline-offset-4 hover:bg-accent hover:text-black hover:decoration-transparent transition-colors"
+              >
+                {link.label.toLowerCase()}
+              </a>
             </div>
           ))}
         </div>
 
-        {/* Footer Links */}
-        <div className="absolute bottom-10 md:bottom-14 left-12 md:left-20">
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm md:text-lg font-mono">
-            <a href="https://www.linkedin.com/in/baybars-alzibdeh" target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-60">LinkedIn</a>
-            <a href="https://github.com/baybars-a/" target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-60">GitHub</a>
-            <a href="mailto:baybarsbahaa@gmail.com" className="transition-opacity hover:opacity-60">Email</a>
-            <a href="https://drive.google.com/file/d/1DDzZLer6Pv6LJuq1yjDi6yD_gHqtGF5P/view" target="_blank" rel="noopener noreferrer" className="transition-opacity hover:opacity-60">Resume</a>
-          </div>
+        {/* Certifications */}
+        <h3 className="text-xs md:text-sm tracking-widest uppercase text-crt-dim mb-3">
+          Certifications
+        </h3>
+        <div className="space-y-1 text-sm md:text-base text-crt-text">
+          {certifications.map((item, i) => (
+            <div key={i} className="flex">
+              <span className="w-28 md:w-40 shrink-0 text-crt-dim">{item.company}</span>
+              <span>{item.role}</span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -81,7 +98,7 @@ export default function PortfolioHeroWithPaperShaders() {
             offsetY={0}
             scale={0.8}
             rotation={0}
-            speed={isVisible ? 0.1 : 0}
+            speed={isVisible && !reducedMotion ? 0.1 : 0}
           />
         </Suspense>
       </div>

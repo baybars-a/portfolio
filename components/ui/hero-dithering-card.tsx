@@ -7,9 +7,11 @@ const Dithering = lazy(() =>
 export function HeroDitheringBackground() {
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     const el = containerRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
@@ -34,7 +36,7 @@ export function HeroDitheringBackground() {
             colorFront="#EC4E02"
             shape="warp"
             type="4x4"
-            speed={!isVisible ? 0 : isHovered ? 0.6 : 0.2}
+            speed={!isVisible || reducedMotion ? 0 : isHovered ? 0.6 : 0.2}
             className="size-full"
             minPixelRatio={1}
           />

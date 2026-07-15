@@ -31,7 +31,7 @@ const Home: React.FC = () => {
         <FlowSection bare aria-label="About" style={{ backgroundColor: '#0a0a0a' }}>
           <About data={about} isEditMode={false} onUpdate={noop} />
         </FlowSection>
-        <FlowSection bare aria-label="Certifications" style={{ backgroundColor: '#2d1507' }}>
+        <FlowSection bare aria-label="Contact" style={{ backgroundColor: '#2d1507' }}>
           <PortfolioHeroWithPaperShaders />
         </FlowSection>
       </FlowArt>

@@ -10,15 +10,18 @@ const config: Config = {
     extend: {
       colors: {
         accent: '#ff8100',
+        // CRT palette — warm tones only; no pure whites or cool grays.
+        crt: {
+          bright: '#f2e8d8', // headings ("white" on a warm tube)
+          text: '#c9b8a2',   // body text
+          dim: '#9b8b76',    // secondary text, icons
+          faint: '#6b5d4b',  // hints, numbers, disabled
+          green: '#6dff8c',  // phosphor green for terminal semantics
+        },
       },
       fontFamily: {
-        mono: ['"VT323"', '"Space Mono"', 'monospace'],
-        sans: ['"VT323"', 'Inter', 'system-ui', 'sans-serif'],
-        bluescreen: ['"BlueScreen"', 'cursive'],
-        marques: ['"MarquesRoundedDisco"', 'cursive'],
-        ostro: ['"FS Ostro Display VF Regular"', 'serif'],
-        sekuya: ['"Sekuya"', 'system-ui'],
-        cree: ['"BJ Cree"', 'serif'],
+        mono: ['"VT323"', 'ui-monospace', 'monospace'],
+        sans: ['"VT323"', 'system-ui', 'sans-serif'],
       },
       keyframes: {
         'fade-in-up': {

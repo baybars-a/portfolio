@@ -53,11 +53,41 @@ html, body {
   color: black;
 }
 
+/* Keyboard focus — amber terminal ring, visible on every interactive element */
+:focus-visible {
+  outline: 2px solid #ff8100;
+  outline-offset: 2px;
+}
+
+/* No default gray tap flash on iOS; press feedback comes from .btn-press */
+html {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  color-scheme: dark;
+}
+
+/* Terminal list — "> " continuation markers instead of browser discs */
+.term-list {
+  list-style: none;
+}
+
+.term-list > li {
+  padding-left: 1.5ch;
+  position: relative;
+}
+
+.term-list > li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: #ff8100;
+}
+
 /* Navigation link hover highlight animation */
 .nav-link-animated {
   position: relative;
   overflow: hidden;
-  color: #d1d5db;
+  color: #c9b8a2;
   transition: color 0.3s ease;
 }
 
@@ -82,6 +112,21 @@ html, body {
 .nav-link-animated span {
   position: relative;
   z-index: 1;
+}
+
+/* Active section — amber text with a phosphor underline tick */
+.nav-link-animated.is-active {
+  color: #ff8100;
+}
+
+.nav-link-animated.is-active span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background-color: #ff8100;
 }
 
 /* Dot matrix airport board effect for section titles */

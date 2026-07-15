@@ -84,7 +84,10 @@ const ProjectManPage: React.FC<ProjectManPageProps> = ({ project, index, onClose
           [ X ]
         </button>
 
-        <div className="overflow-y-auto px-5 py-5 md:px-10 md:py-8">
+        <div
+          className="overflow-y-auto px-5 py-5 md:px-10 md:py-8"
+          style={{ overscrollBehavior: 'contain' }}
+        >
           {/* man header line */}
           <div className="flex justify-between text-accent/80 mb-8 pr-16">
             <span>{manTitle}</span>

@@ -15,22 +15,32 @@ const VERTEX_SHADER = /* glsl */ `
   }
 `;
 
-// Step 1: static CRT frame — curvature bezel, scanlines, vignette,
-// ambient phosphor haze. Output is premultiplied alpha, composited
-// over the live DOM by the browser.
+// CRT frame + life: curvature bezel, scanlines, vignette, ambient
+// phosphor haze, plus subtle animated grain, a sweeping glow line and
+// gentle flicker. Output is premultiplied alpha, composited over the
+// live DOM by the browser.
 const FRAGMENT_SHADER = /* glsl */ `
   precision highp float;
 
   varying vec2 vUv;
 
   uniform vec2  uResolution;        // physical (drawing buffer) px
+  uniform float uTime;              // seconds
   uniform float uCurvature;
   uniform float uBezel;             // 0 disables the corner crop (mobile)
   uniform float uScanlineIntensity;
   uniform float uScanlinePx;        // physical px between scanlines
   uniform float uVignette;
   uniform float uAmbient;
+  uniform float uNoise;             // animated static grain
+  uniform float uGlowLine;          // sweeping beam strength
+  uniform float uGlowLinePeriod;    // seconds per sweep
+  uniform float uFlicker;           // global brightness instability
   uniform vec3  uPhosphor;
+
+  float hash(vec2 p) {
+    return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+  }
 
   // Barrel-distort UVs outward so the visible screen region bulges;
   // anything mapped outside [0,1] becomes the black bezel.
@@ -62,6 +72,23 @@ const FRAGMENT_SHADER = /* glsl */ `
 
     // Faint amber haze, strongest at screen center.
     float glow = uAmbient * 0.28 * v;
+
+    // Animated static grain: brightens or darkens per pixel per frame.
+    float g = hash(floor(gl_FragCoord.xy * 0.5) + floor(uTime * 24.0));
+    float grain = (g - 0.5) * uNoise;
+    glow += max(grain, 0.0) * 0.7;
+    dark += max(-grain, 0.0) * 0.7;
+
+    // Slow scanning beam sweeping down the tube.
+    float beamPos = fract(uTime / uGlowLinePeriod);
+    float beamDist = suv.y - beamPos;
+    glow += exp(-beamDist * beamDist * 1600.0) * uGlowLine * 0.16;
+
+    // Gentle global flicker on the emitted light.
+    float fl = sin(uTime * 11.0) * 0.5
+             + sin(uTime * 23.7) * 0.3
+             + sin(uTime * 3.1) * 0.2;
+    glow *= 1.0 + fl * uFlicker;
 
     // Composite: amber haze layer under black darkening, premultiplied.
     vec3 rgb = uPhosphor * glow * (1.0 - dark);
@@ -144,12 +171,17 @@ export default function CRTOverlay() {
     const geometry = new THREE.PlaneGeometry(2, 2);
     const uniforms = {
       uResolution: { value: new THREE.Vector2(1, 1) },
+      uTime: { value: 0 },
       uCurvature: { value: CRT_CONFIG.screenCurvature },
       uBezel: { value: 1 },
       uScanlineIntensity: { value: CRT_CONFIG.scanlineIntensity },
       uScanlinePx: { value: CRT_CONFIG.scanlineSpacingPx },
       uVignette: { value: CRT_CONFIG.vignette },
       uAmbient: { value: CRT_CONFIG.ambientLight },
+      uNoise: { value: CRT_CONFIG.staticNoise },
+      uGlowLine: { value: CRT_CONFIG.glowingLine },
+      uGlowLinePeriod: { value: CRT_CONFIG.glowLinePeriodSec },
+      uFlicker: { value: CRT_CONFIG.flickering },
       uPhosphor: { value: new THREE.Color(CRT_CONFIG.phosphor) },
     };
     const material = new THREE.ShaderMaterial({
@@ -164,8 +196,7 @@ export default function CRTOverlay() {
     });
     scene.add(new THREE.Mesh(geometry, material));
 
-    // The frame is static for now — render only on mount and resize.
-    const render = () => {
+    const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       renderer.setPixelRatio(dpr);
       // Size from the element's own box (100lvh) rather than the
@@ -181,14 +212,54 @@ export default function CRTOverlay() {
       uniforms.uScanlinePx.value = CRT_CONFIG.scanlineSpacingPx * dpr;
       uniforms.uBezel.value =
         window.innerWidth < CRT_CONFIG.bezelMinWidthPx ? 0 : 1;
-      renderer.render(scene, camera);
     };
 
-    render();
-    window.addEventListener('resize', render);
+    const render = () => renderer.render(scene, camera);
+
+    // Reduced motion: freeze all instability and render a still frame.
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    let raf = 0;
+    const start = performance.now();
+    const tick = () => {
+      uniforms.uTime.value = (performance.now() - start) / 1000;
+      render();
+      raf = requestAnimationFrame(tick);
+    };
+
+    const play = () => {
+      if (!raf && !reducedMotion && !document.hidden) {
+        raf = requestAnimationFrame(tick);
+      }
+    };
+    const pause = () => {
+      cancelAnimationFrame(raf);
+      raf = 0;
+    };
+    const onVisibility = () => (document.hidden ? pause() : play());
+    const onResize = () => {
+      resize();
+      if (reducedMotion) render();
+    };
+
+    resize();
+    if (reducedMotion) {
+      uniforms.uNoise.value = 0;
+      uniforms.uGlowLine.value = 0;
+      uniforms.uFlicker.value = 0;
+      render();
+    } else {
+      play();
+      document.addEventListener('visibilitychange', onVisibility);
+    }
+    window.addEventListener('resize', onResize);
 
     return () => {
-      window.removeEventListener('resize', render);
+      pause();
+      document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('resize', onResize);
       geometry.dispose();
       material.dispose();
       renderer.dispose();

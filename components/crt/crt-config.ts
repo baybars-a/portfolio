@@ -20,6 +20,7 @@ export interface CrtConfig {
   enableBloom: boolean;
   rgbShift: number;
   glowingLine: number;
+  glowLinePeriodSec: number;
   horizontalSync: number;
   jitter: number;
   flickering: number;
@@ -71,12 +72,14 @@ export const CRT_CONFIG: CrtConfig = {
   /** Bloom runs a full-viewport backdrop blur; disable on low-end. */
   enableBloom: true,
 
-  // ── Animated effects (Step 2 — not wired up yet) ─────────────────────
-  rgbShift: 0.03, // preset has 0; keep 0.02–0.05 for subtle authenticity
-  glowingLine: 0.2,
-  horizontalSync: 0.16,
-  jitter: 0.18,
-  flickering: 0.1,
-  staticNoise: 0.1,
+  // ── Animated effects (Step 2 — "subtle & professional" tuning) ───────
+  // Wired into the shader; all frozen under prefers-reduced-motion.
+  rgbShift: 0.03, // preset has 0; reserved (not yet in shader)
+  glowingLine: 0.2, // sweeping beam strength
+  glowLinePeriodSec: 8, // seconds per glow-line sweep (slow)
+  horizontalSync: 0, // tears disabled for the professional tuning
+  jitter: 0, // positional shake disabled for readability
+  flickering: 0.05, // gentle brightness instability
+  staticNoise: 0.05, // faint animated grain
   burnIn: 0.4, // may become a CSS/canvas approximation — see notes
 };
