@@ -6,47 +6,43 @@ import { Project } from '../../types';
 interface ProjectManPageProps {
   project: Project;
   index: number;
+  total: number;
   onClose: () => void;
 }
 
-const slug = (title: string) =>
-  title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
+const winFont = '"Tahoma", "MS Sans Serif", "Segoe UI", sans-serif';
 
-// Renders "[--flag value]" synopsis chunks with man-page-style
-// underlined arguments.
-const SynopsisLine: React.FC<{ text: string }> = ({ text }) => (
-  <>
-    {text.split(/(\[[^\]]+\])/g).map((part, i) =>
-      part.startsWith('[') ? (
-        <span key={i}>
-          {'['}
-          <span className="underline decoration-accent/60 underline-offset-2">
-            {part.slice(1, -1)}
-          </span>
-          {']'}
-        </span>
-      ) : (
-        <span key={i}>{part}</span>
-      )
-    )}
-  </>
+// Classic raised 3D bevel (buttons, window frame).
+const raisedShadow =
+  'inset 1px 1px 0 #fff, inset -1px -1px 0 #000, inset 2px 2px 0 #dfdfdf, inset -2px -2px 0 #808080';
+// Classic sunken 3D bevel (text areas, status bar well).
+const sunkenShadow =
+  'inset 1px 1px 0 #808080, inset -1px -1px 0 #fff, inset 2px 2px 0 #404040, inset -2px -2px 0 #dfdfdf';
+
+const TitleBarButton: React.FC<{ label: string; onClick?: () => void; ariaLabel: string }> = ({
+  label,
+  onClick,
+  ariaLabel,
+}) => (
+  <button
+    onClick={onClick}
+    aria-label={ariaLabel}
+    style={{ boxShadow: raisedShadow, fontFamily: winFont }}
+    className="w-[18px] h-[16px] bg-[#c0c0c0] text-black text-[11px] leading-none font-bold
+               flex items-center justify-center active:shadow-none"
+  >
+    {label}
+  </button>
 );
 
-const ProjectManPage: React.FC<ProjectManPageProps> = ({ project, index, onClose }) => {
+const ProjectManPage: React.FC<ProjectManPageProps> = ({ project, index, total, onClose }) => {
   const dialogRef = useRef<HTMLDivElement>(null);
-  const name = project.manName ?? slug(project.title);
-  const section = index + 1; // project number doubles as the man section
-  const manTitle = `${name.toUpperCase()}(${section})`;
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'q' || e.key === 'Q' || e.key === 'Escape') onClose();
+      if (e.key === 'Escape') onClose();
     };
     window.addEventListener('keydown', onKey);
-    // Lock page scroll behind the pager and focus it for keyboard users.
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     dialogRef.current?.focus();
@@ -62,91 +58,101 @@ const ProjectManPage: React.FC<ProjectManPageProps> = ({ project, index, onClose
       onClick={onClose}
     >
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/80" />
+      <div className="absolute inset-0 bg-black/60" />
 
-      {/* Pager */}
+      {/* Window */}
       <div
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-label={`Manual page for ${project.title}`}
+        aria-label={`Project details for ${project.title}`}
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-4xl max-h-full flex flex-col bg-[#0d0702] border border-accent/25 font-mono text-accent text-xs md:text-sm leading-relaxed shadow-[0_0_60px_rgba(255,129,0,0.15)] outline-none"
+        style={{ background: '#c0c0c0', boxShadow: raisedShadow, fontFamily: winFont }}
+        className="relative w-full max-w-2xl max-h-full flex flex-col p-[3px] outline-none"
       >
-        {/* Close control */}
-        <button
-          onClick={onClose}
-          aria-label="Close manual page"
-          className="absolute top-3 right-3 md:top-4 md:right-5 z-10 font-bold text-accent
-                     hover:bg-accent hover:text-black transition-colors px-1"
-        >
-          [ X ]
-        </button>
-
+        {/* Title bar */}
         <div
-          className="overflow-y-auto px-5 py-5 md:px-10 md:py-8"
-          style={{ overscrollBehavior: 'contain' }}
+          className="flex items-center justify-between px-1.5 py-1 mb-[3px]"
+          style={{ background: 'linear-gradient(90deg, #000080, #1084d0)' }}
         >
-          {/* man header line */}
-          <div className="flex justify-between text-accent/80 mb-8 pr-16">
-            <span>{manTitle}</span>
-            <span className="hidden sm:inline">User Commands</span>
-            <span>{manTitle}</span>
+          <span className="text-white text-[13px] font-bold truncate pr-2 select-none">
+            📄 {project.title}
+          </span>
+          <div className="flex gap-[3px] flex-shrink-0">
+            <TitleBarButton label="✕" ariaLabel="Close" onClick={onClose} />
           </div>
+        </div>
 
-          <h2 className="uppercase tracking-wider mb-1 text-accent">Name</h2>
-          <p className="pl-6 md:pl-10 mb-6 text-accent/90">
-            {name} —{' '}
-            {project.title
-              .toLowerCase()
-              // drop a leading "name —" so titles that start with the
-              // command don't read "uniq — uniq — ..."
-              .replace(new RegExp(`^${name}\\s*[—–-]\\s*`, 'i'), '')}
-          </p>
+        {/* Menu bar (decorative) */}
+        <div className="flex gap-4 px-2 py-1 text-[12px] text-black select-none">
+          {['File', 'Edit', 'View', 'Help'].map((m) => (
+            <span key={m}>{m}</span>
+          ))}
+        </div>
 
-          {project.synopsis && (
-            <>
-              <h2 className="uppercase tracking-wider mb-1 text-accent">Synopsis</h2>
-              <p className="pl-6 md:pl-10 mb-6 text-accent/90 break-words">
-                <span className="font-bold">{name}</span>{' '}
-                <SynopsisLine text={project.synopsis.replace(`${name} `, '')} />
-              </p>
-            </>
-          )}
+        {/* Content — sunken text area */}
+        <div
+          className="mx-2 mb-2 bg-white overflow-y-auto"
+          style={{ boxShadow: sunkenShadow, overscrollBehavior: 'contain', maxHeight: '60vh' }}
+        >
+          <div className="p-4 text-black text-[16px] leading-relaxed">
+            {project.tags?.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    style={{ boxShadow: raisedShadow }}
+                    className="bg-[#c0c0c0] px-2 py-0.5 text-[11px]"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
 
-          {project.description && (
-            <>
-              <h2 className="uppercase tracking-wider mb-1 text-accent">Description</h2>
-              <p className="pl-6 md:pl-10 mb-6 text-accent/90">{project.description}</p>
-            </>
-          )}
+            {project.description && (
+              <p className="mb-4">{project.description}</p>
+            )}
 
-          {project.result && (
-            <>
-              <h2 className="uppercase tracking-wider mb-1 text-accent">Results</h2>
-              <p className="pl-6 md:pl-10 mb-6 text-accent/90">{project.result}</p>
-            </>
-          )}
+            {project.result && (
+              <>
+                <p className="font-bold mb-1">Outcome:</p>
+                <p className="mb-4">{project.result}</p>
+              </>
+            )}
 
-          <h2 className="uppercase tracking-wider mb-1 text-accent">Environment</h2>
-          <p className="pl-6 md:pl-10 mb-6 text-accent/90">{project.tags.join(', ')}</p>
-
-          {project.githubUrl && (
-            <>
-              <h2 className="uppercase tracking-wider mb-1 text-accent">See Also</h2>
-              <p className="pl-6 md:pl-10 mb-2">
+            {project.githubUrl && (
+              <p>
+                <span className="font-bold">Repository: </span>
                 <a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#6dff8c] underline underline-offset-2 hover:bg-[#6dff8c] hover:text-black transition-colors"
+                  className="text-[#0000ee] underline hover:text-[#ff0000]"
                 >
                   {project.githubUrl.replace('https://', '')}
                 </a>
               </p>
-            </>
-          )}
+            )}
+          </div>
+        </div>
+
+        {/* Status bar */}
+        <div className="flex items-center justify-between gap-2 px-2 pb-2">
+          <span
+            style={{ boxShadow: sunkenShadow }}
+            className="flex-1 bg-[#c0c0c0] px-2 py-0.5 text-[11px] text-black"
+          >
+            Project {String(index + 1).padStart(2, '0')} of {String(total).padStart(2, '0')}
+          </span>
+          <button
+            onClick={onClose}
+            style={{ boxShadow: raisedShadow }}
+            className="bg-[#c0c0c0] text-black text-[12px] px-4 py-0.5 active:shadow-none"
+          >
+            OK
+          </button>
         </div>
       </div>
     </div>

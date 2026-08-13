@@ -73,13 +73,13 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
                 </h3>
               </div>
 
-              {/* man-page hint on hover */}
+              {/* hint on hover */}
               <span
                 className="hidden md:inline font-mono text-xs text-transparent group-hover:text-crt-green/80
                            transition-colors duration-300 flex-shrink-0 pt-[6px] select-none"
                 aria-hidden="true"
               >
-                man {project.manName ?? 'page'}
+                open details
               </span>
 
               {/* GitHub — terminal bracket token */}
@@ -105,6 +105,7 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
         <ProjectManPage
           project={data[openIndex]}
           index={openIndex}
+          total={data.length}
           onClose={() => setOpenIndex(null)}
         />
       )}

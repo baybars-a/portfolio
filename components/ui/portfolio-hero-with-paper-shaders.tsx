@@ -7,13 +7,14 @@ const DitheringLazy = lazy(() =>
 )
 
 const certifications = [
-  { company: "IBM",          role: "Machine Learning with Python",                     },
-  { company: "IBM",          role: "IBM Z Xplore",                                     },
-  { company: "IBM",          role: "Fundamentals of Encryption & Quantum-Safe",        },
-  { company: "Databricks",   role: "Generative AI Fundamentals",                      },
-  { company: "Databricks",   role: "Databricks Fundamentals",                         },
-  { company: "FreeCodeCamp", role: "Scientific Computing with Python",                },
-  { company: "Microsoft",    role: "Foundational C# with Microsoft",                  },
+  { company: "IBM",                 role: "Machine Learning with Python",              },
+  { company: "IBM",                 role: "IBM Z Xplore",                              },
+  { company: "IBM",                 role: "Fundamentals of Encryption & Quantum-Safe", },
+  { company: "Databricks",          role: "Generative AI Fundamentals",                },
+  { company: "Databricks",          role: "Databricks Fundamentals",                   },
+  { company: "FreeCodeCamp",        role: "Scientific Computing with Python",          },
+  { company: "Microsoft",           role: "Foundational C# with Microsoft",            },
+  { company: "Anthropic Education", role: "Claude Code in Action",                     },
 ]
 
 const links = [
@@ -43,20 +44,20 @@ export default function PortfolioHeroWithPaperShaders() {
   return (
     <div ref={sectionRef} id="certifications" className="relative min-h-screen overflow-hidden flex bg-brown-dark">
       {/* Left panel — full width on mobile, half on desktop */}
-      <div className="w-full md:w-1/2 py-10 pl-12 pr-4 md:py-14 md:pl-20 md:pr-8 font-mono relative z-10 text-crt-text flex flex-col">
+      <div className="w-full md:w-1/2 py-10 pl-12 pr-6 md:py-14 md:pl-20 md:pr-12 font-mono relative z-10 text-crt-text flex flex-col justify-center">
 
         {/* Header */}
-        <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-crt-bright mb-2">
+        <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-crt-bright mb-4">
           CONTACT
         </h2>
-        <p className="text-sm md:text-base text-crt-dim mb-8 md:mb-10">
+        <p className="text-lg md:text-2xl text-crt-dim mb-10 md:mb-14">
           Baybars Al-Zibdeh — open to ML / software roles
         </p>
 
         {/* Contact links — prompt style */}
-        <div className="mb-10 md:mb-14 space-y-1.5 text-sm md:text-base">
+        <div className="mb-10 md:mb-14 space-y-3 text-lg md:text-2xl">
           {links.map((link) => (
-            <div key={link.label} className="flex items-baseline gap-2">
+            <div key={link.label} className="flex items-baseline gap-3">
               <span className="text-crt-green/80 select-none">$</span>
               <a
                 href={link.href}
@@ -71,13 +72,13 @@ export default function PortfolioHeroWithPaperShaders() {
         </div>
 
         {/* Certifications */}
-        <h3 className="text-xs md:text-sm tracking-widest uppercase text-crt-dim mb-3">
+        <h3 className="text-sm md:text-base tracking-widest uppercase text-crt-dim mb-4">
           Certifications
         </h3>
-        <div className="space-y-1 text-sm md:text-base text-crt-text">
+        <div className="space-y-2 text-base md:text-xl text-crt-text">
           {certifications.map((item, i) => (
             <div key={i} className="flex">
-              <span className="w-28 md:w-40 shrink-0 text-crt-dim">{item.company}</span>
+              <span className="w-32 md:w-48 shrink-0 text-crt-dim">{item.company}</span>
               <span>{item.role}</span>
             </div>
           ))}

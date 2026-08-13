@@ -12,10 +12,10 @@ interface AboutProps {
 
 const About: React.FC<AboutProps> = ({ data, isEditMode, onUpdate }) => {
   return (
-    <section id="about" className="py-20 md:py-32 max-w-6xl mx-auto px-6">
-      <div className="flex flex-col md:flex-row items-center gap-16">
+    <section id="about" className="min-h-screen flex items-center py-20 md:py-32 max-w-6xl mx-auto px-6">
+      <div className="flex flex-col md:flex-row items-center gap-16 w-full">
         <div className="md:w-1/3">
-          <div className="aspect-square overflow-hidden w-48 h-48 md:w-64 md:h-64 mx-auto border border-accent/30 bg-black">
+          <div className="aspect-square overflow-hidden w-56 h-56 md:w-80 md:h-80 mx-auto border border-accent/30 bg-black">
             <img
               src="./baybars.png"
               alt="Baybars Al-Zibdeh, portrait rendered in amber phosphor duotone"
@@ -31,10 +31,10 @@ const About: React.FC<AboutProps> = ({ data, isEditMode, onUpdate }) => {
           <ScrambleText
             text="About"
             as="h2"
-            className="text-3xl md:text-5xl font-mono font-bold tracking-tight text-crt-bright mb-6"
+            className="text-3xl md:text-6xl font-mono font-bold tracking-tight text-crt-bright mb-8"
           />
           <p
-            className={`text-lg text-crt-text leading-relaxed mb-4 ${isEditMode ? 'outline-dashed outline-1 outline-accent p-1' : ''}`}
+            className={`text-xl md:text-2xl text-crt-text leading-relaxed mb-6 ${isEditMode ? 'outline-dashed outline-1 outline-accent p-1' : ''}`}
             contentEditable={isEditMode}
             suppressContentEditableWarning
             onBlur={(e) => onUpdate('about.text1', e.currentTarget.textContent || '')}
@@ -42,7 +42,7 @@ const About: React.FC<AboutProps> = ({ data, isEditMode, onUpdate }) => {
             {data.text1}
           </p>
           <p
-            className={`text-lg text-crt-text leading-relaxed ${isEditMode ? 'outline-dashed outline-1 outline-accent p-1' : ''}`}
+            className={`text-xl md:text-2xl text-crt-text leading-relaxed ${isEditMode ? 'outline-dashed outline-1 outline-accent p-1' : ''}`}
             contentEditable={isEditMode}
             suppressContentEditableWarning
             onBlur={(e) => onUpdate('about.text2', e.currentTarget.textContent || '')}

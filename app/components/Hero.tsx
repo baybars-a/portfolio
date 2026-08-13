@@ -1,6 +1,7 @@
 import React from 'react';
 import { PortfolioData } from '../../types';
 import { HeroDitheringBackground } from '../../components/ui/hero-dithering-card';
+import AsciiWordmark from './AsciiWordmark';
 
 // figlet "ANSI Shadow". Rendered in system monospace fonts (Consolas/Menlo)
 // rather than Space Mono — the box-drawing glyphs must all come from one
@@ -25,22 +26,20 @@ const Hero: React.FC<HeroProps> = ({ name, data }) => {
         <p className="font-mono text-sm md:text-base tracking-wide text-crt-green/80 mb-4">
           {data.greeting}
         </p>
-        <h1 aria-label="BAYBARS" className="mb-8 flex justify-center">
-          <pre
-            aria-hidden="true"
-            className="text-accent select-none"
-            style={{
-              fontFamily:
-                'Consolas, Menlo, "DejaVu Sans Mono", "Liberation Mono", monospace',
-              fontSize: 'clamp(4.5px, 1.9vw, 19px)',
-              lineHeight: 1,
-              textShadow:
-                '0 0 8px rgba(255, 129, 0, 0.55), 0 0 28px rgba(255, 129, 0, 0.3)',
-            }}
-          >
-            {BAYBARS_ASCII}
-          </pre>
-        </h1>
+        <AsciiWordmark
+          art={BAYBARS_ASCII}
+          label="BAYBARS"
+          radius={55}
+          className="text-accent select-none"
+          style={{
+            fontFamily:
+              'Consolas, Menlo, "DejaVu Sans Mono", "Liberation Mono", monospace',
+            fontSize: 'clamp(4.5px, 1.9vw, 19px)',
+            lineHeight: 1,
+            textShadow:
+              '0 0 8px rgba(255, 129, 0, 0.55), 0 0 28px rgba(255, 129, 0, 0.3)',
+          }}
+        />
         <p className="text-crt-text text-base md:text-lg leading-relaxed max-w-xl mx-auto mb-10">
           {data.description}
         </p>
