@@ -3,6 +3,7 @@ import "./globals.css";
 import { initialData } from "../constants/constants";
 import { ThemeProvider } from "next-themes";
 import CRTOverlay from "../components/crt/CRTOverlay";
+import BottomMask from "../components/crt/BottomMask";
 
 export const metadata: Metadata = {
   title: `${initialData.name} | Personal Portfolio`,
@@ -43,6 +44,7 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
         <CRTOverlay />
+        <BottomMask />
       </body>
     </html>
   );
