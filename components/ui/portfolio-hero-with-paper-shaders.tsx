@@ -51,7 +51,7 @@ export default function PortfolioHeroWithPaperShaders() {
           CONTACT
         </h2>
         <p className="text-lg md:text-2xl text-crt-dim mb-10 md:mb-14">
-          Baybars Al-Zibdeh — open to ML / software roles
+          Baybars Al-Zibdeh
         </p>
 
         {/* Contact links — prompt style */}

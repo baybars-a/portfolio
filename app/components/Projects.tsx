@@ -107,6 +107,8 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
           index={openIndex}
           total={data.length}
           onClose={() => setOpenIndex(null)}
+          onPrev={openIndex > 0 ? () => setOpenIndex(openIndex - 1) : undefined}
+          onNext={openIndex < data.length - 1 ? () => setOpenIndex(openIndex + 1) : undefined}
         />
       )}
     </section>

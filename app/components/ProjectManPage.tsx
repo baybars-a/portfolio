@@ -8,6 +8,8 @@ interface ProjectManPageProps {
   index: number;
   total: number;
   onClose: () => void;
+  onPrev?: () => void;
+  onNext?: () => void;
 }
 
 const winFont = '"Tahoma", "MS Sans Serif", "Segoe UI", sans-serif';
@@ -35,12 +37,39 @@ const TitleBarButton: React.FC<{ label: string; onClick?: () => void; ariaLabel:
   </button>
 );
 
-const ProjectManPage: React.FC<ProjectManPageProps> = ({ project, index, total, onClose }) => {
+const NavButton: React.FC<{ direction: 'prev' | 'next'; onClick: () => void }> = ({
+  direction,
+  onClick,
+}) => (
+  <button
+    onClick={onClick}
+    aria-label={direction === 'prev' ? 'Previous project' : 'Next project'}
+    style={{ boxShadow: raisedShadow, fontFamily: winFont }}
+    className={
+      'absolute top-1/2 -translate-y-1/2 z-10 w-9 h-9 md:w-11 md:h-11 bg-[#c0c0c0] text-black ' +
+      'text-lg md:text-xl font-bold flex items-center justify-center active:shadow-none select-none ' +
+      (direction === 'prev' ? 'left-2 md:-left-14' : 'right-2 md:-right-14')
+    }
+  >
+    {direction === 'prev' ? '◀' : '▶'}
+  </button>
+);
+
+const ProjectManPage: React.FC<ProjectManPageProps> = ({
+  project,
+  index,
+  total,
+  onClose,
+  onPrev,
+  onNext,
+}) => {
   const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
+      if (e.key === 'ArrowLeft' && onPrev) onPrev();
+      if (e.key === 'ArrowRight' && onNext) onNext();
     };
     window.addEventListener('keydown', onKey);
     const prevOverflow = document.body.style.overflow;
@@ -50,7 +79,7 @@ const ProjectManPage: React.FC<ProjectManPageProps> = ({ project, index, total, 
       window.removeEventListener('keydown', onKey);
       document.body.style.overflow = prevOverflow;
     };
-  }, [onClose]);
+  }, [onClose, onPrev, onNext]);
 
   return (
     <div
@@ -71,6 +100,9 @@ const ProjectManPage: React.FC<ProjectManPageProps> = ({ project, index, total, 
         style={{ background: '#c0c0c0', boxShadow: raisedShadow, fontFamily: winFont }}
         className="relative w-full max-w-2xl max-h-full flex flex-col p-[3px] outline-none"
       >
+        {onPrev && <NavButton direction="prev" onClick={onPrev} />}
+        {onNext && <NavButton direction="next" onClick={onNext} />}
+
         {/* Title bar */}
         <div
           className="flex items-center justify-between px-1.5 py-1 mb-[3px]"
