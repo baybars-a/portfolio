@@ -72,17 +72,12 @@ export default function PortfolioHeroWithPaperShaders() {
         </div>
 
         {/* Certifications */}
-        <h3 className="text-sm md:text-base tracking-widest uppercase text-crt-dim mb-4">
+        <h3 className="text-xs md:text-sm tracking-widest uppercase text-crt-dim mb-2">
           Certifications
         </h3>
-        <div className="space-y-2 text-base md:text-xl text-crt-text">
-          {certifications.map((item, i) => (
-            <div key={i} className="flex">
-              <span className="w-32 md:w-48 shrink-0 text-crt-dim">{item.company}</span>
-              <span>{item.role}</span>
-            </div>
-          ))}
-        </div>
+        <p className="font-sans text-xs md:text-sm leading-relaxed text-crt-dim max-w-md">
+          {certifications.map((item) => `${item.role} (${item.company})`).join(' · ')}
+        </p>
       </div>
 
       {/* Shader — hidden on mobile */}

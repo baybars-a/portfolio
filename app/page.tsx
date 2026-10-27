@@ -22,11 +22,11 @@ const Home: React.FC = () => {
         <FlowSection bare aria-label="Hero" style={{ backgroundColor: '#000000' }}>
           <Hero name={name} data={hero} />
         </FlowSection>
-        <FlowSection bare aria-label="Projects" style={{ backgroundColor: '#0a0a0a' }}>
-          <Projects data={projects} isEditMode={false} onUpdate={noop} onAdd={noop} onRemove={noop} />
-        </FlowSection>
         <FlowSection bare aria-label="Work Experience" style={{ backgroundColor: '#0a0503' }}>
           <WorkExperience data={workExperience} />
+        </FlowSection>
+        <FlowSection bare aria-label="Projects" style={{ backgroundColor: '#0a0a0a' }}>
+          <Projects data={projects} isEditMode={false} onUpdate={noop} onAdd={noop} onRemove={noop} />
         </FlowSection>
         <FlowSection bare aria-label="About" style={{ backgroundColor: '#0a0a0a' }}>
           <About data={about} isEditMode={false} onUpdate={noop} />

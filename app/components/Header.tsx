@@ -8,8 +8,8 @@ interface HeaderProps {
 
 const navLinks = [
   { href: '#home', id: 'home', label: 'HOME' },
-  { href: '#projects', id: 'projects', label: 'PROJECTS' },
   { href: '#work-experience', id: 'work-experience', label: 'EXPERIENCE' },
+  { href: '#projects', id: 'projects', label: 'PROJECTS' },
   { href: '#about', id: 'about', label: 'ABOUT' },
   { href: '#certifications', id: 'certifications', label: 'CONTACT' },
 ];
@@ -54,7 +54,8 @@ const Header: React.FC<HeaderProps> = ({ data: _data }) => {
     e.preventDefault();
     const target = document.querySelector(href);
     if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
     }
     setIsMenuOpen(false);
   };

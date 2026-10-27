@@ -7,7 +7,6 @@ interface ScrambleTextProps {
   className?: string;
   as?: 'h1' | 'h2' | 'h3' | 'p' | 'span';
   scrambleSpeed?: number;
-  dotEffect?: boolean;
 }
 
 const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -17,7 +16,6 @@ const ScrambleText: React.FC<ScrambleTextProps> = ({
   className = '',
   as: Tag = 'h2',
   scrambleSpeed = 80,
-  dotEffect = false,
 }) => {
   const [displayText, setDisplayText] = useState(text);
   const hasAnimated = useRef(false);
@@ -56,6 +54,8 @@ const ScrambleText: React.FC<ScrambleTextProps> = ({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // Reduced motion: show the final text, no scramble.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -76,9 +76,10 @@ const ScrambleText: React.FC<ScrambleTextProps> = ({
   }, [scramble]);
 
   return (
+    // aria-label keeps screen readers on the real text while the visible glyphs scramble.
     // @ts-expect-error dynamic tag ref typing
-    <Tag ref={ref} className={`${dotEffect ? 'dot-title' : ''} ${className}`}>
-      {displayText}
+    <Tag ref={ref} aria-label={text} className={className}>
+      <span aria-hidden="true">{displayText}</span>
     </Tag>
   );
 };

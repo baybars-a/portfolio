@@ -13,20 +13,65 @@ interface ProjectsProps {
   onRemove: (path: string, index: number) => void;
 }
 
-const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, onRemove }) => {
+const linkClass =
+  'btn-press font-mono text-base md:text-lg text-crt-text hover:bg-accent hover:text-black transition-colors px-1';
+
+// Demo / Code / Details — the same three exits on every project.
+const ProjectLinks: React.FC<{ project: Project; onDetails: () => void }> = ({ project, onDetails }) => (
+  <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+    {project.demoUrl && (
+      <a
+        href={project.demoUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${linkClass} text-accent`}
+        aria-label={`Watch a demo of ${project.title}`}
+      >
+        [ demo ↗ ]
+      </a>
+    )}
+    {project.githubUrl && (
+      <a
+        href={project.githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={linkClass}
+        aria-label={`View ${project.title} source on GitHub`}
+      >
+        [ code ]
+      </a>
+    )}
+    <button
+      type="button"
+      onClick={onDetails}
+      className={linkClass}
+      aria-label={`How ${project.title} works`}
+    >
+      [ how it works → ]
+    </button>
+  </div>
+);
+
+const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onAdd }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const handleAddProject = () => {
     onAdd('projects', {
       title: 'New Project',
+      summary: 'One plain-English sentence.',
+      highlight: 'One result, ideally with a number.',
       description: 'A brief description.',
-      imageUrl: '',
       tags: ['New Tag'],
     });
   };
 
+  // Keep each project's index into `data` so the details view can page through all of them.
+  const indexed = data.map((project, index) => ({ project, index }));
+  const featured = indexed.filter(({ project }) => project.featured);
+  const more = indexed.filter(({ project }) => !project.featured);
+
   return (
-    <section id="projects" className="py-20 md:py-32 max-w-6xl mx-auto px-6">
+    <section id="projects" className="py-20 md:py-32 max-w-4xl mx-auto px-6">
       <div className="flex justify-between items-center mb-16">
         <ScrambleText
           text="Projects"
@@ -43,63 +88,56 @@ const Projects: React.FC<ProjectsProps> = ({ data, isEditMode, onUpdate, onAdd, 
         )}
       </div>
 
-      <div>
-        {data.map((project, index) => (
-          <div
-            key={index}
-            role="button"
-            tabIndex={0}
-            aria-label={`Open manual page for ${project.title}`}
-            className="project-row group border-t border-accent/15 py-5 md:py-7 cursor-pointer"
-            onClick={() => setOpenIndex(index)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                setOpenIndex(index);
-              }
-            }}
-          >
-            <div className="flex items-start gap-4 md:gap-8">
-              {/* Index */}
-              <span className="font-mono text-xs text-crt-faint tabular-nums pt-[6px] w-6 flex-shrink-0">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-
-              {/* Title */}
-              <div className="flex-1 min-w-0">
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-mono text-crt-bright tracking-tight
-                               leading-tight transition-colors duration-300 group-hover:text-accent">
-                  {project.title}
-                </h3>
-              </div>
-
-              {/* hint on hover */}
-              <span
-                className="hidden md:inline font-mono text-xs text-transparent group-hover:text-crt-green/80
-                           transition-colors duration-300 flex-shrink-0 pt-[6px] select-none"
-                aria-hidden="true"
-              >
-                open details
-              </span>
-
-              {/* GitHub — terminal bracket token */}
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-press flex-shrink-0 font-mono text-xs md:text-sm text-crt-faint hover:text-accent pt-[6px]"
-                  onClick={(e) => e.stopPropagation()}
-                  aria-label={`View ${project.title} source on GitHub`}
-                >
-                  [git]
-                </a>
-              )}
-            </div>
-          </div>
+      {/* Featured — summary, result and links all visible without a click */}
+      <div className="space-y-16 md:space-y-20">
+        {featured.map(({ project, index }) => (
+          <article key={index} className="border-t border-accent/15 pt-8">
+            <h3 className="text-2xl md:text-4xl font-mono text-crt-bright tracking-tight leading-tight mb-4">
+              {project.title}
+            </h3>
+            <p className="text-crt-text text-base md:text-lg leading-relaxed mb-4 max-w-prose">
+              {project.summary}
+            </p>
+            <p className="text-accent text-sm md:text-base leading-relaxed mb-4">
+              → {project.highlight}
+            </p>
+            {project.tags?.length > 0 && (
+              <p className="text-crt-dim text-xs md:text-sm mb-5">{project.tags.join(' · ')}</p>
+            )}
+            <ProjectLinks project={project} onDetails={() => setOpenIndex(index)} />
+          </article>
         ))}
-        <div className="border-t border-accent/15" />
       </div>
+
+      {/* More — one compact row each */}
+      {more.length > 0 && (
+        <div className="mt-24">
+          <h3 className="font-mono text-sm md:text-base tracking-widest uppercase text-crt-dim mb-6">
+            More projects
+          </h3>
+          {more.map(({ project, index }) => (
+            <div key={index} className="border-t border-accent/15 py-6">
+              <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 md:gap-6 mb-2">
+                <h4 className="text-xl md:text-2xl font-mono text-crt-bright tracking-tight leading-tight">
+                  {project.title}
+                </h4>
+                <div className="hidden md:block">
+                  <ProjectLinks project={project} onDetails={() => setOpenIndex(index)} />
+                </div>
+              </div>
+              <p className="text-crt-text text-sm md:text-base leading-relaxed max-w-prose">
+                {project.summary}
+              </p>
+              <p className="text-accent/90 text-xs md:text-sm mt-1">→ {project.highlight}</p>
+              {/* On mobile the links follow the text instead of sitting above it */}
+              <div className="md:hidden mt-3">
+                <ProjectLinks project={project} onDetails={() => setOpenIndex(index)} />
+              </div>
+            </div>
+          ))}
+          <div className="border-t border-accent/15" />
+        </div>
+      )}
 
       {openIndex !== null && data[openIndex] && (
         <ProjectManPage

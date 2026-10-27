@@ -37,18 +37,18 @@ export const CRT_CONFIG: CrtConfig = {
 
   // ── Static frame (Step 1) ────────────────────────────────────────────
   /** Barrel distortion of the screen boundary (preset: 0.1). */
-  screenCurvature: 0.1,
+  screenCurvature: 0.05,
   /**
    * Below this viewport width the black bezel (corner crop) is dropped;
    * the fisheye still shows via curved scanlines + vignette.
    */
   bezelMinWidthPx: 768,
   /** Scanline darkening strength (rasterization). */
-  scanlineIntensity: 0.22,
+  scanlineIntensity: 0.1,
   /** CSS px between scanlines (scaled by devicePixelRatio internally). */
   scanlineSpacingPx: 3,
   /** Edge darkening. */
-  vignette: 0.32,
+  vignette: 0.2,
   /** Faint amber haze across the screen (preset ambientLight: 0.16). */
   ambientLight: 0.16,
 
@@ -66,7 +66,7 @@ export const CRT_CONFIG: CrtConfig = {
   brightness: 1.0,
   contrast: 0.95,
   /** Soft-glow bleed over bright areas (preset bloom: 0.65). */
-  bloom: 0.65,
+  bloom: 0.3,
   /** Blur radius of the bloom pass, CSS px. Bigger = softer + costlier. */
   bloomRadiusPx: 4,
   /** Bloom runs a full-viewport backdrop blur; disable on low-end. */
@@ -75,11 +75,11 @@ export const CRT_CONFIG: CrtConfig = {
   // ── Animated effects (Step 2 — "subtle & professional" tuning) ───────
   // Wired into the shader; all frozen under prefers-reduced-motion.
   rgbShift: 0.03, // preset has 0; reserved (not yet in shader)
-  glowingLine: 0.2, // sweeping beam strength
+  glowingLine: 0.1, // sweeping beam strength
   glowLinePeriodSec: 8, // seconds per glow-line sweep (slow)
   horizontalSync: 0, // tears disabled for the professional tuning
   jitter: 0, // positional shake disabled for readability
-  flickering: 0.05, // gentle brightness instability
-  staticNoise: 0.05, // faint animated grain
+  flickering: 0, // gentle brightness instability
+  staticNoise: 0.02, // faint animated grain
   burnIn: 0.4, // may become a CSS/canvas approximation — see notes
 };

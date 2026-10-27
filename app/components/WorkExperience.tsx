@@ -35,6 +35,9 @@ const WorkExperience: React.FC<WorkExperienceProps> = ({ data }) => {
                   <p className="text-crt-text mb-4 font-medium">
                     {exp.company} &bull; {exp.location}
                   </p>
+                  {exp.summary && (
+                    <p className="text-accent text-base md:text-lg leading-relaxed mb-6">→ {exp.summary}</p>
+                  )}
                   <ul className="term-list space-y-4 text-crt-text text-base leading-relaxed">
                     {exp.description.map((item, i) => (
                       <li key={i}>{item}</li>

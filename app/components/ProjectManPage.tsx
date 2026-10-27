@@ -65,6 +65,14 @@ const ProjectManPage: React.FC<ProjectManPageProps> = ({
 }) => {
   const dialogRef = useRef<HTMLDivElement>(null);
 
+  const sections = [
+    { label: 'Problem', text: project.problem },
+    { label: 'What I built', text: project.description },
+    { label: 'Key decision', text: project.decision },
+    { label: 'Result', text: project.result },
+    { label: 'Limits', text: project.limits },
+  ];
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -74,10 +82,13 @@ const ProjectManPage: React.FC<ProjectManPageProps> = ({
     window.addEventListener('keydown', onKey);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+    // Return keyboard focus to whatever opened the dialog.
+    const opener = document.activeElement as HTMLElement | null;
     dialogRef.current?.focus();
     return () => {
       window.removeEventListener('keydown', onKey);
       document.body.style.overflow = prevOverflow;
+      opener?.focus();
     };
   }, [onClose, onPrev, onNext]);
 
@@ -143,15 +154,29 @@ const ProjectManPage: React.FC<ProjectManPageProps> = ({
               </div>
             )}
 
-            {project.description && (
-              <p className="mb-4">{project.description}</p>
+            {project.summary && <p className="mb-5 italic">{project.summary}</p>}
+
+            {sections.map(({ label, text }) =>
+              text ? (
+                <React.Fragment key={label}>
+                  <h3 className="font-bold mb-1">{label}</h3>
+                  <p className="mb-4">{text}</p>
+                </React.Fragment>
+              ) : null
             )}
 
-            {project.result && (
-              <>
-                <p className="font-bold mb-1">Outcome:</p>
-                <p className="mb-4">{project.result}</p>
-              </>
+            {project.demoUrl && (
+              <p className="mb-1">
+                <span className="font-bold">Demo: </span>
+                <a
+                  href={project.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#0000ee] underline hover:text-[#ff0000]"
+                >
+                  watch it run ↗
+                </a>
+              </p>
             )}
 
             {project.githubUrl && (

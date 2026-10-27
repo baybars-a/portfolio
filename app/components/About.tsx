@@ -34,7 +34,7 @@ const About: React.FC<AboutProps> = ({ data, isEditMode, onUpdate }) => {
             className="text-3xl md:text-6xl font-mono font-bold tracking-tight text-crt-bright mb-8"
           />
           <p
-            className={`text-xl md:text-2xl text-crt-text leading-relaxed mb-6 ${isEditMode ? 'outline-dashed outline-1 outline-accent p-1' : ''}`}
+            className={`text-lg md:text-xl text-crt-text leading-relaxed mb-6 ${isEditMode ? 'outline-dashed outline-1 outline-accent p-1' : ''}`}
             contentEditable={isEditMode}
             suppressContentEditableWarning
             onBlur={(e) => onUpdate('about.text1', e.currentTarget.textContent || '')}
@@ -42,7 +42,7 @@ const About: React.FC<AboutProps> = ({ data, isEditMode, onUpdate }) => {
             {data.text1}
           </p>
           <p
-            className={`text-xl md:text-2xl text-crt-text leading-relaxed ${isEditMode ? 'outline-dashed outline-1 outline-accent p-1' : ''}`}
+            className={`text-lg md:text-xl text-crt-text leading-relaxed ${isEditMode ? 'outline-dashed outline-1 outline-accent p-1' : ''}`}
             contentEditable={isEditMode}
             suppressContentEditableWarning
             onBlur={(e) => onUpdate('about.text2', e.currentTarget.textContent || '')}
